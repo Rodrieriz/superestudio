@@ -1,0 +1,1806 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="bosque">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SuperEstudio ⭐</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════
+   BASE RESET & SHARED LAYOUT
+═══════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--body-font);background:var(--bg);min-height:100vh;color:var(--ink);transition:background .3s}
+
+/* ═══════════════════════════════════════
+   THEME: PAPEL (editorial, warm paper)
+═══════════════════════════════════════ */
+[data-theme="papel"]{
+  --bg:#FEFCF3;--paper:#FFFDF0;--warm:#FFF8E1;
+  --ink:#1A1207;--muted:#78716C;--border:#E7E0CC;--border-strong:#C8BFA8;
+  --accent:#E85D04;--gold:#FFBE0B;
+  --header-bg:#1A1207;--header-text:#FFBE0B;
+  --nav-bg:#FFFFFF;--nav-border:#E7E0CC;
+  --tab-active-bg:var(--bg);--tab-font:'Syne',sans-serif;
+  --body-font:'Nunito',sans-serif;--display-font:'Syne',sans-serif;
+  --card-radius:12px;--card-border:2px;--card-shadow:3px 3px 0;
+  --btn-radius:10px;--card-bg:#FFFFFF;
+  --bg-pattern:radial-gradient(circle,#E8E0C8 1px,transparent 1px);
+  --bg-size:20px 20px;
+  --cdm:#16803D;--cdm-l:#DCFCE7;--cdm-m:#4ADE80;
+  --eng:#1D4ED8;--eng-l:#DBEAFE;--eng-m:#93C5FD;
+  --len:#BE123C;--len-l:#FFE4E6;--len-m:#FDA4AF;
+  --mus:#6D28D9;--mus-l:#EDE9FE;--mus-m:#C4B5FD;
+  --gen:#C2410C;--gen-l:#FFEDD5;--gen-m:#FDBA74;
+  --ia:#0F766E;--ia-l:#CCFBF1;--ia-m:#5EEAD4;--ia-d:#134E4A;
+  --mat:#0369A1;--mat-l:#E0F2FE;--mat-m:#38BDF8;
+  --greet-bg:#1A1207;--greet-border:#FFBE0B;--greet-text:#FFBE0B;--greet-sub:rgba(255,255,255,.65);
+  --dw-bg:#FFFFFF;
+}
+
+/* ═══════════════════════════════════════
+   THEME: COLORES (bright primary school)
+═══════════════════════════════════════ */
+[data-theme="colores"]{
+  --bg:#FFFDF5;--paper:#FFFFFF;--warm:#FFF9E6;
+  --ink:#1a1a1a;--muted:#6B6B6B;--border:#FFD6E7;--border-strong:#FF8FAB;
+  --accent:#FF6B6B;--gold:#FFE66D;
+  --header-bg:linear-gradient(135deg,#FF6B6B,#FF8E53,#FFE66D);--header-text:#FFFFFF;
+  --nav-bg:#FFFFFF;--nav-border:#FFD6E7;
+  --tab-active-bg:#FFFDF5;--tab-font:'Fredoka One',cursive;
+  --body-font:'Nunito',sans-serif;--display-font:'Fredoka One',cursive;
+  --card-radius:20px;--card-border:3px;--card-shadow:5px 5px 0;
+  --btn-radius:30px;--card-bg:#FFFFFF;
+  --bg-pattern:radial-gradient(circle,#FFE4EF 1.5px,transparent 1.5px);
+  --bg-size:22px 22px;
+  --cdm:#15803D;--cdm-l:#DCFCE7;--cdm-m:#4ADE80;
+  --eng:#1D4ED8;--eng-l:#DBEAFE;--eng-m:#93C5FD;
+  --len:#BE123C;--len-l:#FFE4E6;--len-m:#FDA4AF;
+  --mus:#7C3AED;--mus-l:#EDE9FE;--mus-m:#C4B5FD;
+  --gen:#D97706;--gen-l:#FEF9C3;--gen-m:#FDE047;
+  --ia:#0F766E;--ia-l:#CCFBF1;--ia-m:#5EEAD4;--ia-d:#0D4A43;
+  --mat:#0369A1;--mat-l:#E0F2FE;--mat-m:#38BDF8;
+  --greet-bg:linear-gradient(135deg,#FF6B6B,#FF8E53);--greet-border:#FFE66D;--greet-text:#FFFFFF;--greet-sub:rgba(255,255,255,.85);
+  --dw-bg:#FFFFFF;
+}
+
+/* ═══════════════════════════════════════
+   THEME: BOSQUE (adventure/nature)
+═══════════════════════════════════════ */
+[data-theme="bosque"]{
+  --bg:#F5F2E8;--paper:#FFFDF5;--warm:#FFF8E8;
+  --ink:#2C2416;--muted:#6E6248;--border:#D4C898;--border-strong:#B09B72;
+  --accent:#E05A00;--gold:#F0B000;
+  --header-bg:linear-gradient(135deg,#2C4A1E 0%,#3A6B28 40%,#1E5040 100%);--header-text:#F5D060;
+  --nav-bg:#FAF7EC;--nav-border:#D4C898;
+  --tab-active-bg:#F5F2E8;--tab-font:'Fredoka One',cursive;
+  --body-font:'Nunito',sans-serif;--display-font:'Fredoka One',cursive;
+  --card-radius:16px;--card-border:2.5px;--card-shadow:4px 4px 0;
+  --btn-radius:14px;--card-bg:#FFFDF5;
+  --bg-pattern:linear-gradient(#D4C898 1px,transparent 1px),linear-gradient(90deg,#D4C898 1px,transparent 1px);
+  --bg-size:28px 28px;
+  --cdm:#1A8C3A;--cdm-l:#D4F5DC;--cdm-m:#52CC72;
+  --eng:#1558C0;--eng-l:#D8EAFF;--eng-m:#5C98F0;
+  --len:#C01830;--len-l:#FFD8DC;--len-m:#F06878;
+  --mus:#7020C8;--mus-l:#EAD8FF;--mus-m:#AA70F0;
+  --gen:#D06000;--gen-l:#FFECD4;--gen-m:#F09040;
+  --ia:#0A8070;--ia-l:#C8F5EC;--ia-m:#38C8A8;--ia-d:#065044;
+  --mat:#0C5E8A;--mat-l:#D8EFF8;--mat-m:#3AABDA;
+  --greet-bg:linear-gradient(135deg,#2C4A1E,#1E5040);--greet-border:#F5D060;--greet-text:#F5D060;--greet-sub:rgba(255,255,255,.75);
+  --dw-bg:#FFFDF5;
+}
+
+/* ═══════════════════════════════════════
+   THEME: POKÉMON
+═══════════════════════════════════════ */
+[data-theme="pokemon"]{
+  --bg:#FFFBE5;--paper:#FFFFFF;--warm:#FFF6CC;
+  --ink:#1A1A2E;--muted:#5A5A80;--border:#FFCB05;--border-strong:#E3350D;
+  --accent:#E3350D;--gold:#FFCB05;
+  --header-bg:linear-gradient(180deg,#E3350D 0%,#CC0000 48%,#1A1A2E 50%,#1A1A2E 100%);--header-text:#FFCB05;
+  --nav-bg:#FFFFFF;--nav-border:#FFCB05;
+  --tab-active-bg:#FFFBE5;--tab-font:'Fredoka One',cursive;
+  --body-font:'Nunito',sans-serif;--display-font:'Fredoka One',cursive;
+  --card-radius:20px;--card-border:3px;--card-shadow:5px 5px 0;
+  --btn-radius:30px;--card-bg:#FFFFFF;
+  --bg-pattern:radial-gradient(circle,#FFCB05 1.5px,transparent 1.5px);
+  --bg-size:24px 24px;
+  --cdm:#27AE60;--cdm-l:#E8F8F0;--cdm-m:#52D68A;
+  --eng:#3B4CCA;--eng-l:#EAF0FF;--eng-m:#7B8FE0;
+  --len:#E3350D;--len-l:#FFE8E5;--len-m:#FF7A6B;
+  --mus:#8E44AD;--mus-l:#F5E8FE;--mus-m:#C080DC;
+  --gen:#E67E22;--gen-l:#FEF0E0;--gen-m:#F0A855;
+  --ia:#16A085;--ia-l:#D5F5EF;--ia-m:#48C9B0;--ia-d:#0E6655;
+  --mat:#1565C0;--mat-l:#E8F0FE;--mat-m:#FFD700;
+  --greet-bg:linear-gradient(135deg,#E3350D,#CC0000);--greet-border:#FFCB05;--greet-text:#FFCB05;--greet-sub:rgba(255,255,255,.9);
+  --dw-bg:#FFFFFF;
+}
+
+/* ═══════════════════════════════════════
+   THEME: FIFA
+═══════════════════════════════════════ */
+[data-theme="fifa"]{
+  --bg:#F0F8F3;--paper:#FFFFFF;--warm:#E8F5EE;
+  --ink:#0A2218;--muted:#3D6B50;--border:#9ECFB2;--border-strong:#1E8449;
+  --accent:#00A650;--gold:#FFD700;
+  --header-bg:linear-gradient(135deg,#0A2218 0%,#1A5C35 55%,#0A2218 100%);--header-text:#FFD700;
+  --nav-bg:#FFFFFF;--nav-border:#9ECFB2;
+  --tab-active-bg:#F0F8F3;--tab-font:'Syne',sans-serif;
+  --body-font:'Nunito',sans-serif;--display-font:'Syne',sans-serif;
+  --card-radius:10px;--card-border:2px;--card-shadow:4px 4px 0;
+  --btn-radius:8px;--card-bg:#FFFFFF;
+  --bg-pattern:repeating-linear-gradient(0deg,rgba(0,166,80,.05) 0,rgba(0,166,80,.05) 12px,transparent 12px,transparent 24px);
+  --bg-size:auto;
+  --cdm:#00A650;--cdm-l:#E0F6EB;--cdm-m:#50D890;
+  --eng:#1565C0;--eng-l:#E3EEFF;--eng-m:#5C98F0;
+  --len:#C62828;--len-l:#FFEBEE;--len-m:#EF9A9A;
+  --mus:#6A1B9A;--mus-l:#F3E5F5;--mus-m:#CE93D8;
+  --gen:#E65100;--gen-l:#FFF3E0;--gen-m:#FFCC80;
+  --ia:#00695C;--ia-l:#E0F2F1;--ia-m:#4DB6AC;--ia-d:#004D40;
+  --mat:#01579B;--mat-l:#DCF0FF;--mat-m:#29B6F6;
+  --greet-bg:linear-gradient(135deg,#0A2218,#1A5C35);--greet-border:#FFD700;--greet-text:#FFD700;--greet-sub:rgba(255,255,255,.75);
+  --dw-bg:#FFFFFF;
+}
+
+/* ═══════════════════════════════════════
+   THEME: K-POP
+═══════════════════════════════════════ */
+[data-theme="kpop"]{
+  --bg:#FFF0F7;--paper:#FFFFFF;--warm:#FFF5FB;
+  --ink:#2D1B36;--muted:#9060A0;--border:#F0B8DC;--border-strong:#D060A8;
+  --accent:#D0208C;--gold:#FFD0EA;
+  --header-bg:linear-gradient(135deg,#D0208C 0%,#8A20C0 50%,#4040C0 100%);--header-text:#FFFFFF;
+  --nav-bg:#FFFFFF;--nav-border:#F0B8DC;
+  --tab-active-bg:#FFF0F7;--tab-font:'Fredoka One',cursive;
+  --body-font:'Nunito',sans-serif;--display-font:'Fredoka One',cursive;
+  --card-radius:22px;--card-border:2.5px;--card-shadow:4px 4px 0;
+  --btn-radius:30px;--card-bg:#FFFFFF;
+  --bg-pattern:radial-gradient(circle,#F0B8DC 1px,transparent 1px);
+  --bg-size:20px 20px;
+  --cdm:#00897B;--cdm-l:#E0F5F2;--cdm-m:#4DB6AC;
+  --eng:#5C6BC0;--eng-l:#EEEEFF;--eng-m:#9FA8DA;
+  --len:#D0208C;--len-l:#FCE4F4;--len-m:#F48FB8;
+  --mus:#8A20C0;--mus-l:#F3E5F5;--mus-m:#CE93D8;
+  --gen:#FF6090;--gen-l:#FFF0F5;--gen-m:#FFAABB;
+  --ia:#0097A7;--ia-l:#E0F7FA;--ia-m:#4DD0E1;--ia-d:#006064;
+  --mat:#7B1FA2;--mat-l:#F8E8FF;--mat-m:#E040FB;
+  --greet-bg:linear-gradient(135deg,#D0208C,#8A20C0);--greet-border:#FFD0EA;--greet-text:#FFFFFF;--greet-sub:rgba(255,255,255,.88);
+  --dw-bg:#FFFFFF;
+}
+
+/* ═══════════════════════════════════════
+   THEME: ROBLOX
+═══════════════════════════════════════ */
+[data-theme="roblox"]{
+  --bg:#F5F5F5;--paper:#FFFFFF;--warm:#F0F0F0;
+  --ink:#1A1A1A;--muted:#555555;--border:#CCCCCC;--border-strong:#999999;
+  --accent:#E02020;--gold:#FF6600;
+  --header-bg:#1A1A1A;--header-text:#FFFFFF;
+  --nav-bg:#FFFFFF;--nav-border:#CCCCCC;
+  --tab-active-bg:#F5F5F5;--tab-font:'Fredoka One',cursive;
+  --body-font:'Nunito',sans-serif;--display-font:'Fredoka One',cursive;
+  --card-radius:8px;--card-border:3px;--card-shadow:4px 4px 0;
+  --btn-radius:8px;--card-bg:#FFFFFF;
+  --bg-pattern:linear-gradient(#DDDDDD 1px,transparent 1px),linear-gradient(90deg,#DDDDDD 1px,transparent 1px);
+  --bg-size:32px 32px;
+  --cdm:#0A8040;--cdm-l:#DCFCE7;--cdm-m:#4ADE80;
+  --eng:#1060C8;--eng-l:#DBEAFE;--eng-m:#60A5FA;
+  --len:#C81010;--len-l:#FEE2E2;--len-m:#F87171;
+  --mus:#8020C0;--mus-l:#EDE9FE;--mus-m:#A78BFA;
+  --gen:#E06000;--gen-l:#FFEDD5;--gen-m:#FB923C;
+  --ia:#1A6E60;--ia-l:#CCFBF1;--ia-m:#2DD4BF;--ia-d:#0E4A3E;
+  --mat:#1060C8;--mat-l:#DBEAFE;--mat-m:#60A5FA;
+  --mat:#1060C8;--mat-l:#DBEAFE;--mat-m:#60A5FA;
+  --greet-bg:#1A1A1A;--greet-border:#E02020;--greet-text:#FFFFFF;--greet-sub:rgba(255,255,255,.7);
+  --dw-bg:#FFFFFF;
+}
+
+/* ═══════════════════════════════════════
+   THEME: BRAWL STARS
+═══════════════════════════════════════ */
+[data-theme="brawl"]{
+  --bg:#1A0A2E;--paper:#241240;--warm:#2E1850;
+  --ink:#FFFFFF;--muted:#B090D0;--border:#4A2880;--border-strong:#8050C8;
+  --accent:#FFD700;--gold:#FF8C00;
+  --header-bg:linear-gradient(135deg,#0D0520 0%,#1A0A3A 50%,#0D0520 100%);--header-text:#FFD700;
+  --nav-bg:#1A0A2E;--nav-border:#4A2880;
+  --tab-active-bg:#1A0A2E;--tab-font:'Fredoka One',cursive;
+  --body-font:'Nunito',sans-serif;--display-font:'Fredoka One',cursive;
+  --card-radius:16px;--card-border:2.5px;--card-shadow:4px 4px 0;
+  --btn-radius:30px;--card-bg:#241240;
+  --bg-pattern:radial-gradient(circle,rgba(255,215,0,.12) 1px,transparent 1px);
+  --bg-size:28px 28px;
+  --cdm:#20C050;--cdm-l:#0A2820;--cdm-m:#20C050;
+  --eng:#4080FF;--eng-l:#0A1840;--eng-m:#4080FF;
+  --len:#FF3060;--len-l:#2A0818;--len-m:#FF3060;
+  --mus:#C040FF;--mus-l:#200A30;--mus-m:#C040FF;
+  --gen:#FFD700;--gen-l:#201000;--gen-m:#FFD700;
+  --ia:#20C8B0;--ia-l:#082020;--ia-m:#20C8B0;--ia-d:#20C8B0;
+  --mat:#4080FF;--mat-l:#0A1840;--mat-m:#4080FF;
+  --greet-bg:linear-gradient(135deg,#0D0520,#2A1060);--greet-border:#FFD700;--greet-text:#FFD700;--greet-sub:rgba(255,255,255,.8);
+  --dw-bg:#241240;
+}
+
+/* ═══════════════════════════════════════
+   THEME: MINECRAFT
+═══════════════════════════════════════ */
+[data-theme="minecraft"]{
+  --bg:#87CEEB;--paper:#F5F0E0;--warm:#EDE8D0;
+  --ink:#1A1108;--muted:#4A4030;--border:#8B7355;--border-strong:#5C4A28;
+  --accent:#5C8A20;--gold:#F0C020;
+  --header-bg:#1A1108;--header-text:#5CDE20;
+  --nav-bg:#3C3020;--nav-border:#5C4A28;
+  --tab-active-bg:#87CEEB;--tab-font:'Nunito',sans-serif;
+  --body-font:'Nunito',sans-serif;--display-font:'Nunito',sans-serif;
+  --card-radius:0px;--card-border:3px;--card-shadow:4px 4px 0;
+  --btn-radius:0px;--card-bg:#F5F0E0;
+  --bg-pattern:none;
+  --bg-size:auto;
+  --cdm:#3A8020;--cdm-l:#D8F0C0;--cdm-m:#70C040;
+  --eng:#2060A0;--eng-l:#C0D8F0;--eng-m:#4090D0;
+  --len:#B82010;--len-l:#F0D0C8;--len-m:#E05040;
+  --mus:#8020A8;--mus-l:#E0C8F0;--mus-m:#B060D0;
+  --gen:#C07010;--gen-l:#F0E0C0;--gen-m:#E0A040;
+  --ia:#186858;--ia-l:#C0E8E0;--ia-m:#40B898;--ia-d:#0E3E30;
+  --mat:#2060A0;--mat-l:#C0D8F0;--mat-m:#4090D0;
+  --greet-bg:#1A1108;--greet-border:#5CDE20;--greet-text:#5CDE20;--greet-sub:rgba(255,255,255,.7);
+  --dw-bg:#F5F0E0;
+}
+
+/* body background pattern */
+body{background-image:var(--bg-pattern);background-size:var(--bg-size)}
+
+/* ═══════════════════════════════════════
+   THEME VISUAL IDENTITIES
+   (override header/nav/cards per theme)
+═══════════════════════════════════════ */
+
+/* ── PAPEL: cuaderno de líneas con espiral ── */
+[data-theme="papel"] body{
+  background-image:
+    linear-gradient(90deg,transparent 62px,#FFAAAA 62px,#FFAAAA 64px,transparent 64px),
+    repeating-linear-gradient(0deg,transparent 0px,transparent 27px,#B8C8DA 28px);
+  background-size:100% 28px;
+}
+[data-theme="papel"] header{
+  background:#2C1F0E;
+  border-bottom:5px solid #7A5C1E;
+  position:relative;overflow:hidden
+}
+/* espiral de anillas en el lado izquierdo */
+[data-theme="papel"] header::before{
+  content:'';
+  position:absolute;left:0;top:0;bottom:0;width:18px;
+  background-image:
+    radial-gradient(circle 5px at 9px 18px, #E8D5A0 60%, transparent 60%),
+    radial-gradient(circle 5px at 9px 42px, #E8D5A0 60%, transparent 60%),
+    radial-gradient(circle 5px at 9px 66px, #E8D5A0 60%, transparent 60%),
+    radial-gradient(circle 5px at 9px 90px, #E8D5A0 60%, transparent 60%),
+    radial-gradient(circle 5px at 9px 114px,#E8D5A0 60%, transparent 60%),
+    radial-gradient(circle 5px at 9px 138px,#E8D5A0 60%, transparent 60%);
+  background-color:#1A1008;
+  border-right:3px solid #7A5C1E
+}
+[data-theme="papel"] .h-inner{padding-left:14px}
+[data-theme="papel"] nav{
+  background:#FEFCF0;
+  border-bottom:2.5px solid #B89A50;
+  border-left:18px solid #1A1008
+}
+
+/* ── COLORES: caja de pinturas y rotuladores ── */
+[data-theme="colores"] body{
+  background-image:
+    radial-gradient(circle,rgba(255,107,107,.18) 2px,transparent 2px),
+    radial-gradient(circle,rgba(78,205,196,.14) 2px,transparent 2px),
+    radial-gradient(circle,rgba(255,230,109,.2) 2px,transparent 2px);
+  background-size:36px 36px,36px 36px,36px 36px;
+  background-position:0 0,18px 18px,9px 27px
+}
+[data-theme="colores"] header{
+  background:linear-gradient(135deg,#FF6B6B 0%,#FF8E53 20%,#FFE66D 40%,#4ECDC4 60%,#A78BFA 80%,#FF6B6B 100%);
+  overflow:hidden;padding-bottom:16px
+}
+/* franja de "ceras de colores" en el borde inferior del header */
+[data-theme="colores"] header::before{
+  content:'';
+  position:absolute;bottom:0;left:0;right:0;height:10px;
+  background:linear-gradient(90deg,
+    #FF0000 0%,#FF4400 12.5%,#FF8800 25%,#FFCC00 37.5%,
+    #88CC00 50%,#00AACC 62.5%,#4466FF 75%,#AA44FF 87.5%,#FF0088 100%)
+}
+[data-theme="colores"] header::after{
+  content:'✏️  🖍️  🖌️  🎨';
+  position:absolute;right:20px;top:50%;transform:translateY(-55%);
+  font-size:20px;letter-spacing:6px;opacity:.55
+}
+[data-theme="colores"] nav{background:#FFF;border-bottom:3px solid #FFD6E7}
+
+/* ── BOSQUE: dosel de árboles con siluetas ── */
+[data-theme="bosque"] body{
+  background-image:
+    linear-gradient(#C8BE90 1px,transparent 1px),
+    linear-gradient(90deg,#C8BE90 1px,transparent 1px);
+  background-size:28px 28px
+}
+[data-theme="bosque"] header{
+  background:linear-gradient(180deg,#081A04 0%,#0D2E08 45%,#1A5010 75%,#256820 100%);
+  overflow:hidden;padding-bottom:20px
+}
+/* silueta de pinos usando SVG data URI */
+[data-theme="bosque"] header::before{
+  content:'';
+  position:absolute;bottom:0;left:0;right:0;height:56px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 56'%3E%3Cpolygon points='12,56 22,28 32,56' fill='%23081A04'/%3E%3Cpolygon points='10,56 22,12 34,56' fill='%230F2E08'/%3E%3Cpolygon points='40,56 52,22 64,56' fill='%230A2006'/%3E%3Cpolygon points='38,56 52,6 66,56' fill='%23143C0C'/%3E%3Cpolygon points='74,56 84,30 94,56' fill='%23081A04'/%3E%3Cpolygon points='72,56 84,14 96,56' fill='%230F2E08'/%3E%3Cpolygon points='104,56 116,18 128,56' fill='%230A2006'/%3E%3Cpolygon points='102,56 116,4 130,56' fill='%231A5010'/%3E%3Cpolygon points='136,56 148,24 160,56' fill='%23081A04'/%3E%3Cpolygon points='134,56 148,8 162,56' fill='%230F2E08'/%3E%3Cpolygon points='168,56 180,20 192,56' fill='%230A2006'/%3E%3Cpolygon points='166,56 180,5 194,56' fill='%23143C0C'/%3E%3Cpolygon points='200,56 210,28 220,56' fill='%23081A04'/%3E%3Cpolygon points='198,56 210,10 222,56' fill='%230F2E08'/%3E%3Cpolygon points='0,56 8,32 16,56' fill='%230A2006'/%3E%3Cpolygon points='224,56 232,26 240,56' fill='%23143C0C'/%3E%3C/svg%3E");
+  background-size:240px 56px;
+  background-repeat:repeat-x
+}
+/* luna o sol entre los árboles */
+[data-theme="bosque"] header::after{
+  content:'';
+  position:absolute;right:90px;top:14px;
+  width:36px;height:36px;border-radius:50%;
+  background:radial-gradient(circle,#FFF8DC 50%,#F5C842 70%,transparent 100%);
+  box-shadow:0 0 24px 8px rgba(245,200,66,.4)
+}
+[data-theme="bosque"] nav{background:#FAF7ED;border-bottom:2px solid #A8995A}
+
+/* ── POKÉMON: Pokéball y panel de juego ── */
+[data-theme="pokemon"] body{
+  background-image:
+    radial-gradient(circle,#FFCB05 1.5px,transparent 1.5px),
+    radial-gradient(circle,rgba(227,53,13,.12) 1.5px,transparent 1.5px);
+  background-size:28px 28px,28px 28px;
+  background-position:0 0,14px 14px
+}
+[data-theme="pokemon"] header{
+  background:linear-gradient(180deg,
+    #CC0000 0%,#E3350D 46%,
+    #111111 46%,#111111 54%,
+    #EEEEEE 54%,#D8D8D8 100%);
+  overflow:hidden
+}
+[data-theme="pokemon"] .h1{color:#FFCB05;text-shadow:2px 3px 0 #111,0 0 20px rgba(255,203,5,.5)}
+[data-theme="pokemon"] .h-sub{color:rgba(0,0,0,.5)}
+/* Pokéball decorativa a la derecha */
+[data-theme="pokemon"] header::before{
+  content:'';
+  position:absolute;right:24px;top:50%;transform:translateY(-50%);
+  width:72px;height:72px;border-radius:50%;
+  background:linear-gradient(180deg,#E3350D 0%,#E3350D 47%,#111 47%,#111 53%,#E8E8E8 53%);
+  border:4px solid #111;
+  box-shadow:0 0 0 4px #FFCB05,0 6px 24px rgba(0,0,0,.5);
+  opacity:.85
+}
+/* botón central de la Pokéball */
+[data-theme="pokemon"] header::after{
+  content:'';
+  position:absolute;right:48px;top:50%;transform:translateY(-50%);
+  width:24px;height:24px;border-radius:50%;
+  background:radial-gradient(circle at 35% 35%,#FFF 30%,#CCC 100%);
+  border:4px solid #111;
+  box-shadow:0 0 0 3px #FFCB05;
+  z-index:2
+}
+[data-theme="pokemon"] nav{
+  background:#1A1A2E;
+  border-bottom:3px solid #FFCB05
+}
+[data-theme="pokemon"] .tb{color:#AAA;background:transparent}
+[data-theme="pokemon"] .tb:hover{background:rgba(255,203,5,.12);color:#FFCB05}
+[data-theme="pokemon"] .tb.active{
+  background:#FFCB05;color:#1A1A2E;
+  border-bottom-color:#FFCB05;border-top-color:#FFCB05
+}
+[data-theme="pokemon"] .card{
+  border-width:3px;
+  background:linear-gradient(160deg,#FFFFFF 80%,rgba(255,203,5,.06) 100%)
+}
+[data-theme="pokemon"] .dw{
+  background:linear-gradient(160deg,#FFFFFF,#FFFBE8);
+  border-color:#FFCB05
+}
+[data-theme="pokemon"] .greet{
+  border-left:8px solid #FFCB05;
+  box-shadow:inset 0 0 40px rgba(227,53,13,.08)
+}
+
+/* ── FIFA: estadio y marcador ── */
+[data-theme="fifa"] body{
+  /* franjas de césped como campo de fútbol */
+  background-image:repeating-linear-gradient(
+    0deg,
+    rgba(0,166,80,.08) 0px,rgba(0,166,80,.08) 22px,
+    rgba(0,166,80,.03) 22px,rgba(0,166,80,.03) 44px
+  );
+  background-size:auto 44px
+}
+[data-theme="fifa"] header{
+  background:linear-gradient(135deg,#061510 0%,#0A2A1A 45%,#061510 100%);
+  border-bottom:4px solid #00A650;
+  position:relative;overflow:hidden
+}
+/* campo de fútbol centrado como watermark */
+[data-theme="fifa"] header::before{
+  content:'';
+  position:absolute;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 80'%3E%3Crect width='160' height='80' fill='none'/%3E%3Ccircle cx='80' cy='40' r='18' stroke='white' stroke-width='1.5' fill='none' opacity='0.3'/%3E%3Ccircle cx='80' cy='40' r='2' fill='white' opacity='0.35'/%3E%3Cline x1='80' y1='0' x2='80' y2='80' stroke='white' stroke-width='1.5' opacity='0.3'/%3E%3Crect x='2' y='2' width='156' height='76' stroke='white' stroke-width='1.5' fill='none' opacity='0.25'/%3E%3Crect x='2' y='22' width='22' height='36' stroke='white' stroke-width='1.2' fill='none' opacity='0.3'/%3E%3Crect x='136' y='22' width='22' height='36' stroke='white' stroke-width='1.2' fill='none' opacity='0.3'/%3E%3Crect x='2' y='30' width='10' height='20' stroke='white' stroke-width='1' fill='none' opacity='0.3'/%3E%3Crect x='148' y='30' width='10' height='20' stroke='white' stroke-width='1' fill='none' opacity='0.3'/%3E%3C/svg%3E");
+  background-size:200px 100px;
+  background-position:center;
+  background-repeat:no-repeat
+}
+[data-theme="fifa"] .h1{
+  text-shadow:0 2px 12px rgba(0,0,0,.6);
+  letter-spacing:3px;
+  text-transform:uppercase
+}
+[data-theme="fifa"] nav{
+  background:#0A2218;
+  border-bottom:3px solid #00A650
+}
+[data-theme="fifa"] .tb{color:rgba(255,255,255,.5);background:transparent}
+[data-theme="fifa"] .tb:hover{background:rgba(0,166,80,.2);color:white}
+[data-theme="fifa"] .tb.active{
+  background:#00A650;color:white;
+  border-top-color:#FFD700;border-bottom-color:#00A650
+}
+[data-theme="fifa"] .card{
+  border-radius:8px;border-left-width:6px;
+  background:linear-gradient(160deg,#FFFFFF 85%,rgba(0,166,80,.04) 100%)
+}
+[data-theme="fifa"] .greet{
+  border-left:8px solid #FFD700;
+  background:linear-gradient(135deg,#061510,#0A2A1A)
+}
+[data-theme="fifa"] .dw{
+  border-left:4px solid #00A650;
+  background:#FFFFFF
+}
+
+/* ── K-POP: idol card holográfica ── */
+[data-theme="kpop"] body{
+  background-image:
+    radial-gradient(circle,rgba(208,32,140,.16) 1.5px,transparent 1.5px),
+    radial-gradient(circle,rgba(138,32,192,.1) 1.5px,transparent 1.5px);
+  background-size:22px 22px,22px 22px;
+  background-position:0 0,11px 11px
+}
+[data-theme="kpop"] header{
+  background:linear-gradient(135deg,
+    #FF1493 0%,#C820A8 20%,#8820D0 40%,#4848D8 60%,#2080E8 80%,#00C0FF 100%);
+  overflow:hidden
+}
+/* trama holográfica diagonal */
+[data-theme="kpop"] header::before{
+  content:'';
+  position:absolute;inset:0;
+  background:repeating-linear-gradient(
+    45deg,
+    transparent,transparent 5px,
+    rgba(255,255,255,.06) 5px,rgba(255,255,255,.06) 6px
+  )
+}
+/* estrellas decorativas */
+[data-theme="kpop"] header::after{
+  content:'✨ ★ 💫 ★ ✨';
+  position:absolute;bottom:6px;right:80px;
+  font-size:13px;letter-spacing:8px;opacity:.6;color:white
+}
+[data-theme="kpop"] .h1{
+  text-shadow:0 0 20px rgba(255,255,255,.4),2px 2px 0 rgba(0,0,0,.2)
+}
+[data-theme="kpop"] nav{
+  background:linear-gradient(90deg,#FFF5FC,#F8F0FF,#FFF5FC);
+  border-bottom:3px solid #F0B8DC
+}
+[data-theme="kpop"] .card{
+  background:linear-gradient(150deg,#FFFFFF 70%,#FFF0F8 100%);
+  box-shadow:4px 4px 0 var(--border),0 0 12px rgba(208,32,140,.06)
+}
+[data-theme="kpop"] .dw{
+  background:linear-gradient(135deg,#FFFFFF,#FFF5FC);
+  border-color:#F0B8DC
+}
+[data-theme="kpop"] .greet{
+  background:linear-gradient(135deg,#D0208C,#8A20C0);
+  box-shadow:0 4px 20px rgba(208,32,140,.25)
+}
+
+/* ── ROBLOX: bloques pixelados y logo blanco/rojo ── */
+[data-theme="roblox"] body{
+  background-image:
+    linear-gradient(#DDDDDD 1px,transparent 1px),
+    linear-gradient(90deg,#DDDDDD 1px,transparent 1px);
+  background-size:32px 32px
+}
+[data-theme="roblox"] header{
+  background:#1A1A1A;
+  border-bottom:4px solid #E02020;
+  overflow:hidden;position:relative
+}
+/* Logo R pixelado usando CSS shapes */
+[data-theme="roblox"] header::before{
+  content:'';
+  position:absolute;right:28px;top:50%;transform:translateY(-50%);
+  width:64px;height:64px;
+  background:
+    /* R pixelada 8x8 */
+    linear-gradient(#E02020,#E02020) 8px 8px/8px 8px no-repeat,
+    linear-gradient(#E02020,#E02020) 16px 8px/8px 8px no-repeat,
+    linear-gradient(#E02020,#E02020) 24px 8px/8px 8px no-repeat,
+    linear-gradient(#E02020,#E02020) 8px 16px/8px 8px no-repeat,
+    linear-gradient(#E02020,#E02020) 24px 16px/8px 8px no-repeat,
+    linear-gradient(#E02020,#E02020) 8px 24px/8px 8px no-repeat,
+    linear-gradient(#E02020,#E02020) 16px 24px/8px 8px no-repeat,
+    linear-gradient(#E02020,#E02020) 24px 24px/8px 8px no-repeat,
+    linear-gradient(#E02020,#E02020) 8px 32px/8px 8px no-repeat,
+    linear-gradient(#E02020,#E02020) 24px 32px/8px 8px no-repeat,
+    linear-gradient(#E02020,#E02020) 8px 40px/8px 8px no-repeat,
+    linear-gradient(#E02020,#E02020) 16px 40px/8px 8px no-repeat;
+  opacity:.6
+}
+[data-theme="roblox"] .h1{
+  font-family:'Fredoka One',cursive;
+  text-shadow:3px 3px 0 #E02020;
+  letter-spacing:2px
+}
+[data-theme="roblox"] nav{background:#2A2A2A;border-bottom:3px solid #E02020}
+[data-theme="roblox"] .tb{color:#AAAAAA;background:transparent}
+[data-theme="roblox"] .tb:hover{background:#383838;color:#FFFFFF}
+[data-theme="roblox"] .tb.active{background:#E02020;color:#FFFFFF;border-top-color:#FF4444;border-bottom-color:#E02020}
+[data-theme="roblox"] .card{border-radius:6px}
+[data-theme="roblox"] .dw{border-radius:6px}
+[data-theme="roblox"] .greet{border-radius:6px;border-left:8px solid #E02020;background:#1A1A1A}
+
+/* ── BRAWL STARS: fondo cósmico con estrellas y energía ── */
+[data-theme="brawl"] body{
+  background-color:#1A0A2E;
+  background-image:
+    radial-gradient(circle,rgba(255,215,0,.15) 1px,transparent 1px),
+    radial-gradient(circle,rgba(192,64,255,.1) 1.5px,transparent 1.5px),
+    radial-gradient(circle,rgba(255,255,255,.08) 1px,transparent 1px);
+  background-size:28px 28px,44px 44px,18px 18px;
+  background-position:0 0,14px 22px,7px 9px
+}
+[data-theme="brawl"] header{
+  background:linear-gradient(180deg,#0D0520 0%,#1A0A3A 60%,#2A0858 100%);
+  overflow:hidden;position:relative;border-bottom:3px solid #FFD700
+}
+/* Resplandor de energía */
+[data-theme="brawl"] header::before{
+  content:'';
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse at 20% 50%,rgba(255,215,0,.15) 0%,transparent 55%),
+    radial-gradient(ellipse at 80% 50%,rgba(192,64,255,.2) 0%,transparent 55%)
+}
+/* Estrellas de Brawl Stars decorativas */
+[data-theme="brawl"] header::after{
+  content:'★  ✦  ★  ✦  ★';
+  position:absolute;bottom:8px;left:50%;transform:translateX(-50%);
+  font-size:14px;letter-spacing:14px;color:#FFD700;opacity:.5;
+  white-space:nowrap
+}
+[data-theme="brawl"] .h1{
+  color:#FFD700;
+  text-shadow:0 0 20px rgba(255,215,0,.6),3px 3px 0 rgba(0,0,0,.8);
+  letter-spacing:2px
+}
+[data-theme="brawl"] nav{
+  background:#120830;
+  border-bottom:3px solid #4A2880
+}
+[data-theme="brawl"] .tb{color:#8060A8;background:transparent}
+[data-theme="brawl"] .tb:hover{background:rgba(255,215,0,.1);color:#FFD700}
+[data-theme="brawl"] .tb.active{
+  background:linear-gradient(135deg,#8020C0,#4040D8);
+  color:#FFD700;border-top-color:#FFD700;border-bottom-color:transparent
+}
+[data-theme="brawl"] .card{
+  border-color:var(--border);
+  background:linear-gradient(160deg,#241240 80%,#2E1850 100%);
+  color:#FFFFFF
+}
+[data-theme="brawl"] .ct,.ct-wrap .ct{color:#FFFFFF}
+[data-theme="brawl"] .cq{color:#B090D0}
+[data-theme="brawl"] .st{color:#E0D0FF}
+[data-theme="brawl"] .dw{
+  background:linear-gradient(135deg,#241240,#2E1850);
+  border-color:#4A2880
+}
+[data-theme="brawl"] .dw-lbl{color:#8060A8}
+[data-theme="brawl"] .date-big{color:#FFD700;text-shadow:0 0 12px rgba(255,215,0,.4)}
+[data-theme="brawl"] .date-week,.date-month{color:#E0D0FF}
+[data-theme="brawl"] .q-text{color:#C040FF}
+[data-theme="brawl"] .f-text{color:#20C8B0}
+[data-theme="brawl"] .cd-none,.q-auth,.w-desc,.w-city{color:#8060A8}
+[data-theme="brawl"] .greet{background:linear-gradient(135deg,#0D0520,#2A1060)}
+[data-theme="brawl"] .welcome,.sh{background:#241240;border-color:#4A2880}
+[data-theme="brawl"] .sh h2{color:#FFD700}
+
+/* ── MINECRAFT: mundo de bloques con tierra, césped y piedra ── */
+[data-theme="minecraft"] body{
+  background-color:#87CEEB;
+  background-image:
+    /* Nubes simples */
+    radial-gradient(ellipse 60px 20px at 15% 20%,rgba(255,255,255,.8) 0%,transparent 100%),
+    radial-gradient(ellipse 80px 24px at 40% 30%,rgba(255,255,255,.7) 0%,transparent 100%),
+    radial-gradient(ellipse 50px 18px at 70% 15%,rgba(255,255,255,.75) 0%,transparent 100%),
+    radial-gradient(ellipse 70px 22px at 88% 25%,rgba(255,255,255,.6) 0%,transparent 100%)
+}
+[data-theme="minecraft"] header{
+  background:#1A1108;
+  border-bottom:6px solid #5C4A28;
+  overflow:hidden;position:relative
+}
+/* Franja de bloques de tierra/hierba */
+[data-theme="minecraft"] header::before{
+  content:'';
+  position:absolute;bottom:0;left:0;right:0;height:10px;
+  background:repeating-linear-gradient(
+    90deg,
+    #5CDE20 0px,#5CDE20 31px,
+    #4AC818 31px,#4AC818 32px,
+    #3A8020 32px,#3A8020 63px,
+    #2E6818 63px,#2E6818 64px,
+    #7B5C38 64px,#7B5C38 95px,
+    #5C4228 95px,#5C4228 96px
+  )
+}
+/* Textura de piedra/bloques en el fondo del header */
+[data-theme="minecraft"] header::after{
+  content:'';
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(0,0,0,.15) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,0,0,.15) 1px,transparent 1px);
+  background-size:16px 16px
+}
+[data-theme="minecraft"] .h1{
+  font-family:'Nunito',sans-serif;font-weight:800;
+  color:#5CDE20;
+  text-shadow:2px 2px 0 #000,4px 4px 0 rgba(0,0,0,.5);
+  letter-spacing:1px;
+  position:relative;z-index:1
+}
+[data-theme="minecraft"] .h-sub{position:relative;z-index:1;color:rgba(255,255,255,.5)}
+[data-theme="minecraft"] .h-tut{position:relative;z-index:1}
+[data-theme="minecraft"] nav{
+  background:#3C3020;
+  border-bottom:4px solid #5C4A28
+}
+[data-theme="minecraft"] .tb{color:#A09070;background:transparent;font-family:'Nunito',sans-serif;font-weight:800}
+[data-theme="minecraft"] .tb:hover{background:#4C4030;color:#DDCC88}
+[data-theme="minecraft"] .tb.active{
+  background:#5CDE20;color:#1A1108;
+  border-top-color:#5CDE20;border-bottom-color:#5CDE20;
+  font-weight:800
+}
+/* Cards con aspecto de bloque de madera/piedra */
+[data-theme="minecraft"] .card{
+  border-radius:0;
+  background:var(--card-bg);
+  image-rendering:pixelated
+}
+[data-theme="minecraft"] .dw{border-radius:0;border-width:3px}
+[data-theme="minecraft"] .greet{
+  border-radius:0;
+  border-left:8px solid #5CDE20;
+  background:#1A1108
+}
+[data-theme="minecraft"] .theme-bar{background:#2C2010;border-bottom:3px solid #5C4A28}
+[data-theme="minecraft"] .theme-label{color:#A09070}
+[data-theme="minecraft"] .theme-btn{background:#3C3020;border-color:#5C4A28;color:#DDCC88}
+[data-theme="minecraft"] .theme-btn:hover{background:#4C4030;border-color:#5CDE20;color:#5CDE20}
+[data-theme="minecraft"] .theme-btn.active{background:#5CDE20;color:#1A1108;border-color:#5CDE20}
+
+/* ═══════════════════════════════════════
+   THEME SWITCHER
+═══════════════════════════════════════ */
+.theme-bar{display:flex;align-items:center;gap:8px;padding:10px 16px;background:rgba(0,0,0,.04);border-bottom:1px solid var(--border);flex-wrap:wrap}
+.theme-label{font-size:11px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-right:4px}
+.theme-btn{
+  padding:6px 14px;border-radius:30px;border:2.5px solid var(--border);
+  font-family:'Nunito',sans-serif;font-size:12px;font-weight:800;cursor:pointer;
+  background:white;color:var(--muted);transition:.15s;white-space:nowrap
+}
+.theme-btn:hover{border-color:var(--accent);color:var(--ink)}
+.theme-btn.active{background:var(--accent);color:white;border-color:var(--accent)}
+.theme-preview{width:12px;height:12px;border-radius:50%;display:inline-block;margin-right:4px;vertical-align:middle}
+
+/* ═══════════════════════════════════════
+   TUTORIAL OVERLAY
+═══════════════════════════════════════ */
+#tut-ov{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9000;display:flex;align-items:center;justify-content:center;padding:16px;backdrop-filter:blur(4px)}
+#tut-ov.off{display:none}
+.tut-card{background:var(--paper);border-radius:20px;max-width:440px;width:100%;padding:36px 28px 24px;position:relative;border:2.5px solid var(--border);box-shadow:8px 8px 0 var(--ink)}
+.tut-x{position:absolute;top:14px;right:16px;background:none;border:none;font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;color:var(--muted);cursor:pointer}
+.tut-x:hover{color:var(--ink)}
+.tut-ico{font-size:52px;display:block;margin-bottom:12px;text-align:center}
+.tut-card h2{font-family:var(--display-font);font-size:22px;text-align:center;margin-bottom:10px;color:var(--ink)}
+.tut-card p{font-size:14px;color:var(--muted);line-height:1.7;font-weight:600;text-align:center;margin-bottom:18px}
+.tut-dots{display:flex;justify-content:center;gap:6px;margin-bottom:16px}
+.tdot{width:9px;height:9px;border-radius:50%;background:var(--border);transition:.2s}
+.tdot.on{background:var(--accent);transform:scale(1.4)}
+.tut-btns{display:flex;gap:10px;justify-content:center}
+.tbtn{padding:10px 22px;border-radius:var(--btn-radius);font-family:var(--display-font);font-size:15px;cursor:pointer;border:2px solid var(--ink);transition:.15s}
+.tbtn.pri{background:var(--accent);color:#fff;border-color:var(--accent)}
+.tbtn.pri:hover{filter:brightness(.9);transform:translateY(-1px)}
+.tbtn.sec{background:white;color:var(--muted);border-color:var(--border)}
+.tbtn.sec:hover{background:var(--warm)}
+.who-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.who-opt{border:2.5px solid var(--border);border-radius:var(--card-radius);padding:20px 12px;cursor:pointer;background:var(--card-bg);transition:.2s;text-align:center;font-family:'Nunito',sans-serif}
+.who-opt:hover{transform:translateY(-3px);box-shadow:4px 4px 0 var(--border)}
+.wo-ico{font-size:34px;display:block;margin-bottom:8px}
+.wo-t{font-family:var(--display-font);font-size:15px;color:var(--ink)}
+.wo-s{font-size:11px;color:var(--muted);margin-top:4px;font-weight:700}
+.who-opt.stu:hover{border-color:var(--cdm);background:var(--cdm-l)}
+.who-opt.par:hover{border-color:var(--ia);background:var(--ia-l)}
+
+/* ═══════════════════════════════════════
+   PASSWORD OVERLAY
+═══════════════════════════════════════ */
+#pw-ov{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:8000;display:flex;align-items:center;justify-content:center;padding:16px;backdrop-filter:blur(4px)}
+#pw-ov.off{display:none}
+.pw-card{background:var(--paper);border-radius:20px;max-width:360px;width:100%;padding:32px 24px;border:2.5px solid var(--ia-m);box-shadow:7px 7px 0 var(--ia)}
+.pw-card h2{font-family:var(--display-font);font-size:21px;margin-bottom:8px;color:var(--ia-d)}
+.pw-card>p{font-size:13px;color:var(--muted);font-weight:600;line-height:1.6;margin-bottom:16px}
+.pw-hint{font-size:12px;color:var(--ia-d);background:var(--ia-l);padding:8px 12px;border-radius:9px;font-weight:700;margin-bottom:14px;border:1.5px solid var(--ia-m)}
+#pw-inp{width:100%;padding:12px;border:2.5px solid var(--border);border-radius:10px;font-family:var(--display-font);font-size:28px;letter-spacing:10px;outline:none;text-align:center;margin-bottom:8px;transition:.2s}
+#pw-inp:focus{border-color:var(--ia)}
+#pw-inp.err{border-color:var(--len);animation:shake .35s ease}
+@keyframes shake{0%,100%{transform:translateX(0)}25%,75%{transform:translateX(-7px)}50%{transform:translateX(7px)}}
+#pw-err{font-size:12px;color:var(--len);font-weight:800;min-height:16px;text-align:center;margin-bottom:12px}
+.pw-enter{width:100%;padding:12px;background:var(--ia);color:white;border:none;border-radius:var(--btn-radius);font-family:var(--display-font);font-size:16px;cursor:pointer;transition:.15s}
+.pw-enter:hover{filter:brightness(.9);transform:translateY(-1px)}
+.pw-cancel{display:block;text-align:center;margin-top:12px;font-size:13px;color:var(--muted);cursor:pointer;font-weight:700}
+.pw-cancel:hover{color:var(--ink)}
+
+/* ═══════════════════════════════════════
+   EXAM MODAL (multi-exam)
+═══════════════════════════════════════ */
+#exam-modal{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:7000;display:flex;align-items:center;justify-content:center;padding:16px}
+#exam-modal.off{display:none}
+.em-card{background:var(--paper);border-radius:var(--card-radius);width:340px;padding:22px 24px;border:2.5px solid var(--gen-m);box-shadow:6px 6px 0 var(--gen)}
+.em-card h3{font-family:var(--display-font);font-size:19px;margin-bottom:3px;color:var(--gen)}
+.em-card .em-lbl{font-size:12px;color:var(--muted);font-weight:700;margin-bottom:12px}
+.em-list{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.em-item{display:flex;align-items:center;gap:8px;background:var(--gen-l);border:1.5px solid var(--gen-m);border-radius:9px;padding:7px 10px}
+.em-item-txt{flex:1;font-size:13px;font-weight:700;color:var(--ink);line-height:1.3}
+.em-item-del{background:none;border:none;cursor:pointer;font-size:16px;color:var(--len);line-height:1;padding:0 2px;flex-shrink:0;transition:.15s}
+.em-item-del:hover{transform:scale(1.2)}
+.em-empty{font-size:12.5px;color:var(--muted);font-weight:700;font-style:italic;padding:4px 0 6px}
+.em-add-row{display:flex;gap:7px;margin-bottom:12px}
+.em-inp{flex:1;padding:9px 13px;border:2.5px solid var(--border);border-radius:9px;font-family:'Nunito',sans-serif;font-size:13.5px;outline:none;transition:.2s;font-weight:700}
+.em-inp:focus{border-color:var(--gen)}
+.em-add-btn{padding:9px 14px;background:var(--gen);color:white;border:none;border-radius:9px;font-family:var(--display-font);font-size:14px;cursor:pointer;white-space:nowrap;flex-shrink:0}
+.em-add-btn:hover{filter:brightness(.9)}
+.em-close{width:100%;padding:9px;background:var(--warm);color:var(--muted);border:2px solid var(--border);border-radius:9px;font-family:var(--display-font);font-size:14px;cursor:pointer}
+.em-close:hover{background:var(--border)}
+.cd-scroll{display:flex;flex-direction:column;gap:8px;max-height:160px;overflow-y:auto}
+.cd-item{background:var(--gen-l);border:1.5px solid var(--gen-m);border-radius:10px;padding:8px 12px;display:flex;align-items:center;gap:10px}
+.cd-item-days{background:var(--gen);color:white;font-family:var(--display-font);font-size:20px;padding:2px 10px;border-radius:8px;line-height:1.3;flex-shrink:0;min-width:42px;text-align:center}
+.cd-item-days.today-pill{background:var(--accent);font-size:13px;padding:4px 8px}
+.cd-item-info{flex:1;min-width:0}
+.cd-item-name{font-family:var(--display-font);font-size:13px;color:var(--ink);word-break:break-word;line-height:1.3}
+.cd-item-sub{font-size:10.5px;color:var(--muted);font-weight:800;margin-top:2px}
+
+/* ═══════════════════════════════════════
+   HEADER
+═══════════════════════════════════════ */
+header{background:var(--header-bg);padding:18px 20px 14px;position:relative;overflow:hidden}
+.h-stripe{position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--accent),var(--gold),var(--cdm-m),var(--eng-m),var(--mus-m),var(--ia-m))}
+.h-inner{max-width:980px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.h1{font-family:var(--display-font);font-size:clamp(22px,6vw,40px);color:var(--header-text);letter-spacing:-.5px;line-height:1}
+.h-sub{font-size:11px;color:rgba(255,255,255,.45);margin-top:3px;font-weight:700;letter-spacing:.5px;text-transform:uppercase}
+.h-tut{background:none;border:2px solid rgba(255,255,255,.2);color:rgba(255,255,255,.65);padding:7px 14px;border-radius:30px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:800;cursor:pointer;transition:.2s;white-space:nowrap}
+.h-tut:hover{border-color:var(--gold);color:var(--gold)}
+
+/* ═══════════════════════════════════════
+   NAV
+═══════════════════════════════════════ */
+nav{background:var(--nav-bg);border-bottom:2.5px solid var(--nav-border);padding:10px 16px 0;display:flex;gap:3px;overflow-x:auto;scrollbar-width:none;position:sticky;top:0;z-index:100}
+nav::-webkit-scrollbar{display:none}
+.tb{flex-shrink:0;padding:9px 14px 11px;border-radius:10px 10px 0 0;border:none;font-family:var(--tab-font);font-size:13px;cursor:pointer;transition:.15s;white-space:nowrap;background:transparent;color:var(--muted);margin-bottom:-2.5px;border-bottom:2.5px solid transparent}
+.tb:hover{background:var(--warm);color:var(--ink)}
+.tb.active{color:var(--ink);background:var(--tab-active-bg);border-bottom-color:var(--tab-active-bg)}
+.tb[data-t="inicio"].active{border-top:3.5px solid var(--accent)}
+.tb[data-t="cdm"].active{border-top:3.5px solid var(--cdm)}
+.tb[data-t="ingles"].active{border-top:3.5px solid var(--eng)}
+.tb[data-t="lengua"].active{border-top:3.5px solid var(--len)}
+.tb[data-t="musica"].active{border-top:3.5px solid var(--mus)}
+.tb[data-t="generales"].active{border-top:3.5px solid var(--gen)}
+.tb[data-t="mates"].active{border-top:3.5px solid var(--mat)}
+.tb[data-t="ia"].active{border-top:3.5px solid var(--ia)}
+
+/* ═══════════════════════════════════════
+   MAIN
+═══════════════════════════════════════ */
+main{max-width:980px;margin:0 auto;padding:22px 16px 64px}
+.tc{display:none}
+.tc.active{display:block;animation:fi .2s ease}
+@keyframes fi{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+/* ═══════════════════════════════════════
+   SECTION HEADER
+═══════════════════════════════════════ */
+.sh{margin-bottom:20px;padding-bottom:14px;border-bottom:2px solid var(--border);display:flex;align-items:center;gap:14px}
+.sh-ico{font-size:30px;flex-shrink:0}
+.sh h2{font-family:var(--display-font);font-size:clamp(19px,5vw,27px)}
+.sh p{font-size:12px;color:var(--muted);margin-top:3px;font-weight:700}
+
+/* ═══════════════════════════════════════
+   GREETING
+═══════════════════════════════════════ */
+.greet{background:var(--greet-bg);border-radius:var(--card-radius);padding:18px 22px;margin-bottom:16px;display:flex;align-items:center;gap:14px;border-left:6px solid var(--greet-border)}
+.greet-ico{font-size:36px;flex-shrink:0}
+.greet h2{font-family:var(--display-font);font-size:clamp(16px,4vw,22px);color:var(--greet-text);line-height:1.2}
+.greet p{font-size:13px;color:var(--greet-sub);margin-top:4px;font-weight:700}
+
+/* ═══════════════════════════════════════
+   DASHBOARD GRID
+═══════════════════════════════════════ */
+.dash{display:grid;grid-template-columns:1fr 1fr 1.6fr;gap:12px;margin-bottom:0}
+.dw{background:var(--dw-bg);border-radius:var(--card-radius);padding:16px 18px;border:2px solid var(--border);position:relative;overflow:hidden}
+.dw-lbl{font-family:var(--display-font);font-size:10px;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin-bottom:8px}
+
+/* Date */
+.dw-date{grid-column:1;grid-row:1}
+.date-big{font-family:var(--display-font);font-size:clamp(40px,8vw,62px);color:var(--accent);line-height:1;margin-bottom:2px}
+.date-week{font-family:var(--display-font);font-size:15px;color:var(--ink)}
+.date-month{font-size:12px;color:var(--muted);font-weight:700;margin-top:2px}
+
+/* Weather */
+.dw-weather{grid-column:2;grid-row:1}
+.w-row{display:flex;align-items:center;gap:12px}
+.w-ico{font-size:38px;line-height:1}
+.w-temp{font-family:var(--display-font);font-size:34px;color:var(--eng);line-height:1}
+.w-desc{font-size:11.5px;color:var(--muted);font-weight:700;margin-top:3px}
+.w-city{font-size:10px;color:#BBBBBB;font-weight:700}
+
+/* Countdown — see .cd-* in exam modal section above */
+.dw-countdown{grid-column:1;grid-row:2}
+.cd-none{font-size:13px;color:var(--muted);font-weight:700;line-height:1.5}
+
+/* Quote */
+.dw-quote{grid-column:2;grid-row:2}
+.q-text{font-family:var(--display-font);font-size:14px;color:var(--mus);line-height:1.45;margin-bottom:5px}
+.q-auth{font-size:11px;color:var(--muted);font-weight:700}
+
+/* Calendar */
+.dw-cal{grid-column:3;grid-row:1/3;display:flex;flex-direction:column}
+.cal-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.cal-hd h3{font-family:var(--display-font);font-size:14px;color:var(--ink);text-transform:capitalize}
+.cal-nav{background:none;border:2px solid var(--border);border-radius:7px;width:26px;height:26px;cursor:pointer;font-size:12px;font-weight:800;color:var(--muted);transition:.15s;display:flex;align-items:center;justify-content:center}
+.cal-nav:hover{border-color:var(--accent);color:var(--accent)}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
+.cal-dh{font-family:var(--display-font);font-size:9px;text-align:center;color:var(--muted);padding:2px 0 5px;text-transform:uppercase}
+.cal-d{
+  border-radius:8px;padding:4px 3px;cursor:pointer;
+  font-family:var(--display-font);font-size:12px;
+  transition:.15s;border:1.5px solid transparent;
+  display:flex;flex-direction:column;align-items:center;
+  min-height:44px;text-align:center
+}
+.cal-d:hover{background:var(--warm);border-color:var(--border)}
+.cal-d.today{background:var(--accent);color:white}
+.cal-d.today:hover{filter:brightness(.92)}
+.cal-d.has-exam{border-color:var(--gen);background:var(--gen-l)}
+.cal-d.has-exam.today{background:var(--accent);border-color:var(--accent)}
+.cal-d.past{opacity:.38;cursor:default}
+.cal-d.empty{cursor:default;min-height:44px}
+.cal-num{font-size:12px;line-height:1.2;display:block}
+.cal-exam-lbl{
+  font-size:9px;font-weight:800;color:var(--gen);margin-top:2px;
+  max-width:100%;word-break:break-word;text-align:center;line-height:1.2;
+  display:block;
+}
+.cal-d.today .cal-exam-lbl{color:rgba(255,255,255,.9)}
+
+/* ═══════════════════════════════════════
+   CARDS
+═══════════════════════════════════════ */
+.cg{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:14px;align-items:start}
+.card{
+  background:var(--card-bg);border-radius:var(--card-radius);
+  border:var(--card-border) solid var(--border);border-left:5px solid;
+  overflow:hidden;cursor:pointer;
+  box-shadow:var(--card-shadow) var(--border);
+  transition:transform .15s,box-shadow .15s
+}
+.card:hover{transform:translate(-2px,-2px)}
+.ch{padding:13px 16px;display:flex;align-items:flex-start;gap:12px}
+.ce{font-size:26px;flex-shrink:0;line-height:1;margin-top:2px}
+.ct-wrap{flex:1;min-width:0}
+.ct{font-family:var(--display-font);font-size:16px;line-height:1.2;color:var(--ink)}
+.cq{font-size:12px;color:var(--muted);margin-top:3px;font-weight:700;line-height:1.35}
+.ca{font-size:10px;transition:.3s;flex-shrink:0;color:#CCCCCC;margin-top:5px}
+.card.open .ca{transform:rotate(180deg)}
+.cb{overflow:hidden;max-height:0;transition:max-height .35s ease}
+.card.open .cb{max-height:700px}
+.cb-inner{padding:14px 16px;border-top:1.5px dashed var(--border)}
+.steps{display:flex;flex-direction:column;gap:10px;margin-bottom:12px}
+.step{display:flex;align-items:flex-start;gap:10px}
+.sn{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--display-font);font-size:12px;color:white;flex-shrink:0;margin-top:2px}
+.st{font-size:13.5px;line-height:1.55;color:var(--ink);font-weight:700;padding-top:2px;opacity:.9}
+.tip{padding:9px 13px;border-radius:9px;border-left:3px solid;font-size:12.5px;line-height:1.5;font-weight:700;font-style:italic;color:var(--ink);opacity:.85}
+
+/* Card themes */
+.cdm{border-left-color:var(--cdm);box-shadow:var(--card-shadow) var(--cdm-m)}.cdm .ch{background:var(--cdm-l)}.cdm .sn{background:var(--cdm)}.cdm .tip{border-color:var(--cdm);background:var(--cdm-l)}
+.ing{border-left-color:var(--eng);box-shadow:var(--card-shadow) var(--eng-m)}.ing .ch{background:var(--eng-l)}.ing .sn{background:var(--eng)}.ing .tip{border-color:var(--eng);background:var(--eng-l)}
+.len{border-left-color:var(--len);box-shadow:var(--card-shadow) var(--len-m)}.len .ch{background:var(--len-l)}.len .sn{background:var(--len)}.len .tip{border-color:var(--len);background:var(--len-l)}
+.mus{border-left-color:var(--mus);box-shadow:var(--card-shadow) var(--mus-m)}.mus .ch{background:var(--mus-l)}.mus .sn{background:var(--mus)}.mus .tip{border-color:var(--mus);background:var(--mus-l)}
+.gen{border-left-color:var(--gen);box-shadow:var(--card-shadow) var(--gen-m)}.gen .ch{background:var(--gen-l)}.gen .sn{background:var(--gen)}.gen .tip{border-color:var(--gen);background:var(--gen-l)}
+.mat{border-left-color:var(--mat);box-shadow:var(--card-shadow) var(--mat-m)}.mat .ch{background:var(--mat-l)}.mat .sn{background:var(--mat)}.mat .tip{border-color:var(--mat);background:var(--mat-l)}
+
+/* ═══════════════════════════════════════
+   IA / PROFE-BOT
+═══════════════════════════════════════ */
+.ia-h{font-family:var(--display-font);font-size:20px;color:var(--ia-d);margin:26px 0 8px}
+.ia-p{font-size:13px;color:var(--muted);margin-bottom:12px;line-height:1.65;font-weight:700}
+
+/* Tool accordions */
+.tool-acc{display:flex;flex-direction:column;gap:10px;margin-top:4px}
+.tacc{border:2px solid var(--border);border-radius:var(--card-radius);overflow:hidden;background:var(--card-bg)}
+.tacc-hd{display:flex;align-items:center;gap:12px;padding:14px 18px;cursor:pointer;user-select:none;transition:background .15s}
+.tacc-hd:hover{background:var(--ia-l)}
+.tacc.open .tacc-hd{background:var(--ia-l);border-bottom:2px solid var(--ia-m)}
+.tacc-ico{font-size:24px;flex-shrink:0}
+.tacc-title{font-family:var(--display-font);font-size:17px;color:var(--ia-d);flex:1}
+.tacc-sub{font-size:11.5px;color:var(--muted);font-weight:700;margin-top:2px}
+.tacc-arr{font-size:12px;color:var(--muted);transition:transform .3s;flex-shrink:0}
+.tacc.open .tacc-arr{transform:rotate(180deg)}
+.tacc-body{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.tacc.open .tacc-body{max-height:600px}
+.tacc-list{display:flex;flex-direction:column;gap:1px;padding:8px 12px 12px}
+.titem{display:flex;align-items:center;gap:14px;padding:11px 14px;border-radius:10px;transition:background .15s;text-decoration:none;cursor:pointer}
+.titem:hover{background:var(--warm)}
+.titem-ico{font-size:22px;flex-shrink:0;width:32px;text-align:center}
+.titem-info{flex:1;min-width:0}
+.titem-name{font-family:var(--display-font);font-size:15px;color:var(--ia-d)}
+.titem-desc{font-size:12px;color:var(--muted);font-weight:700;margin-top:2px;line-height:1.45}
+.titem-badge{flex-shrink:0;padding:3px 10px;border-radius:20px;font-size:10.5px;font-weight:800;background:var(--ia-l);color:var(--ia-d);border:1.5px solid var(--ia-m);white-space:nowrap}
+
+
+/* Chat */
+.chat-wrap{border:2px solid var(--ia-m);border-radius:16px;overflow:hidden;background:var(--card-bg);box-shadow:5px 5px 0 var(--ia-m)}
+.chat-hd{background:var(--ia-d);padding:14px 18px;display:flex;align-items:center;gap:12px;color:white}
+.chat-av{width:42px;height:42px;background:var(--ia-l);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.chat-hd h3{font-family:var(--display-font);font-size:20px}
+.chat-hd p{font-size:11px;opacity:.75;font-weight:700}
+.chat-body{display:flex;align-items:stretch}
+.chat-main{flex:1;display:flex;flex-direction:column;min-width:0}
+.chat-msgs{height:340px;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;scroll-behavior:smooth}
+.msg{max-width:88%;padding:10px 14px;border-radius:14px;font-size:13.5px;line-height:1.65;font-weight:700}
+.msg.bot{background:var(--ia-l);border:1.5px solid var(--ia-m);align-self:flex-start;border-bottom-left-radius:4px;color:var(--ink)}
+.msg.user{background:var(--ia-d);color:white;align-self:flex-end;border-bottom-right-radius:4px}
+.msg.typing{background:var(--ia-l);border:1.5px solid var(--ia-m);align-self:flex-start;padding:14px 16px}
+.dots span{display:inline-block;width:8px;height:8px;background:var(--ia);border-radius:50%;margin:0 2px;animation:bop .9s infinite}
+.dots span:nth-child(2){animation-delay:.15s}.dots span:nth-child(3){animation-delay:.3s}
+@keyframes bop{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-9px)}}
+.chat-attach-preview{padding:6px 12px 0}
+.attach-thumb{display:inline-flex;align-items:center;gap:6px;background:var(--ia-l);border:1.5px solid var(--ia-m);border-radius:8px;padding:5px 10px;font-size:12px;color:var(--ia-d);font-weight:800}
+.attach-rm{background:none;border:none;cursor:pointer;color:var(--ia-d);font-size:14px;margin-left:3px;line-height:1}
+.chat-bar{border-top:2px solid var(--ia-l);padding:10px 12px;background:var(--warm)}
+.chat-bar-row{display:flex;gap:8px;align-items:center}
+.chat-attach-btn{padding:9px 12px;background:white;border:2px solid var(--border);border-radius:9px;cursor:pointer;font-size:16px;transition:.15s;flex-shrink:0}
+.chat-attach-btn:hover{background:var(--ia-l);border-color:var(--ia-m)}
+#file-in{display:none}
+.chat-in{flex:1;padding:10px 14px;border:2px solid var(--border);border-radius:9px;font-family:'Nunito',sans-serif;font-size:13.5px;outline:none;transition:.2s;font-weight:700;background:white}
+.chat-in:focus{border-color:var(--ia)}
+.chat-snd{padding:10px 18px;background:var(--ia);color:white;border:none;border-radius:9px;font-family:var(--display-font);font-size:14px;cursor:pointer;transition:.15s;flex-shrink:0}
+.chat-snd:hover{filter:brightness(.9);transform:translateY(-1px)}
+.chat-snd:disabled{background:#ccc;cursor:not-allowed;transform:none}
+.chat-side{width:180px;flex-shrink:0;border-left:2px solid var(--ia-l);padding:12px;background:var(--warm);display:flex;flex-direction:column;gap:6px;overflow-y:auto}
+.sugs-lbl{font-family:var(--display-font);font-size:10px;text-transform:uppercase;letter-spacing:.6px;color:var(--ia);margin-bottom:2px}
+.sug{padding:7px 9px;border-radius:8px;border:1.5px solid var(--ia-m);background:white;font-size:12px;font-weight:700;color:var(--ia-d);cursor:pointer;transition:.15s;text-align:left;line-height:1.35;font-family:'Nunito',sans-serif}
+.sug:hover{background:var(--ia);color:white;border-color:var(--ia)}
+.msg-attach-lbl{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.15);padding:5px 10px;border-radius:7px;font-size:12px;font-weight:800;margin-top:5px}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════ */
+@media(max-width:760px){
+  .dash{grid-template-columns:1fr 1fr}
+  .dw-cal{grid-column:1/3;grid-row:auto}
+  .cg{grid-template-columns:1fr}
+  nav{padding:8px 8px 0;gap:3px}
+  .tb{padding:8px 9px;font-size:12px}
+  .chat-side{display:none}
+  .chat-msgs{height:260px}
+}
+@media(max-width:480px){
+  .dash{grid-template-columns:1fr}
+  .dw-date,.dw-weather,.dw-countdown,.dw-quote,.dw-cal{grid-column:1;grid-row:auto}
+  .who-grid{grid-template-columns:1fr}
+  .theme-bar{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- TUTORIAL -->
+<div id="tut-ov" class="off"><div class="tut-card" id="tut-card"></div></div>
+
+<!-- PASSWORD -->
+<div id="pw-ov" class="off">
+  <div class="pw-card">
+    <div style="font-size:40px;margin-bottom:12px">🔐</div>
+    <h2>Zona para familias</h2>
+    <p>Esta sección está diseñada para que los padres y madres creen recursos de estudio para sus hijos/as. Introduce la contraseña para acceder.</p>
+    <div class="pw-hint">💡 Si no conoces la contraseña, consulta el <b>Tutorial para familias</b> (botón arriba a la derecha). La encontrarás en el paso 2.</div>
+    <input id="pw-inp" type="password" inputmode="numeric" maxlength="4" placeholder="· · · ·" autocomplete="off">
+    <div id="pw-err"></div>
+    <button class="pw-enter" onclick="checkPw()">Entrar →</button>
+    <span class="pw-cancel" onclick="cancelPw()">← Volver atrás</span>
+  </div>
+</div>
+
+<!-- EXAM MODAL -->
+<div id="exam-modal" class="off">
+  <div class="em-card">
+    <h3>📅 Pruebas del día</h3>
+    <p class="em-lbl" id="em-lbl">—</p>
+    <div class="em-list" id="em-list"></div>
+    <div class="em-add-row">
+      <input id="em-inp" class="em-inp" type="text" placeholder="Añade una prueba…" maxlength="45">
+      <button class="em-add-btn" onclick="addExam()">+ Añadir</button>
+    </div>
+    <button class="em-close" onclick="closeEM()">Cerrar ✓</button>
+  </div>
+</div>
+
+<!-- THEME BAR -->
+<div class="theme-bar">
+  <span class="theme-label">🎨 Estilo:</span>
+  <button class="theme-btn" data-theme-val="papel" onclick="setTheme('papel',this)">
+    <span class="theme-preview" style="background:#E85D04;border:2px solid #FFBE0B"></span>Papel
+  </button>
+  <button class="theme-btn" data-theme-val="colores" onclick="setTheme('colores',this)">
+    <span class="theme-preview" style="background:linear-gradient(135deg,#FF6B6B,#FFE66D)"></span>Colores
+  </button>
+  <button class="theme-btn active" data-theme-val="bosque" onclick="setTheme('bosque',this)">
+    <span class="theme-preview" style="background:linear-gradient(135deg,#2C4A1E,#3A6B28);border:2px solid #F5D060"></span>Bosque
+  </button>
+  <button class="theme-btn" data-theme-val="pokemon" onclick="setTheme('pokemon',this)">
+    <span class="theme-preview" style="background:linear-gradient(180deg,#E3350D 50%,#1A1A2E 50%);border:2px solid #FFCB05"></span>Pokémon
+  </button>
+  <button class="theme-btn" data-theme-val="fifa" onclick="setTheme('fifa',this)">
+    <span class="theme-preview" style="background:linear-gradient(135deg,#0A2218,#1A5C35);border:2px solid #FFD700"></span>FIFA
+  </button>
+  <button class="theme-btn" data-theme-val="kpop" onclick="setTheme('kpop',this)">
+    <span class="theme-preview" style="background:linear-gradient(135deg,#D0208C,#8A20C0,#4040C0)"></span>K-Pop
+  </button>
+  <button class="theme-btn" data-theme-val="roblox" onclick="setTheme('roblox',this)">
+    <span class="theme-preview" style="background:#1A1A1A;border:2px solid #E02020"></span>Roblox
+  </button>
+  <button class="theme-btn" data-theme-val="brawl" onclick="setTheme('brawl',this)">
+    <span class="theme-preview" style="background:linear-gradient(135deg,#1A0A2E,#2A0858);border:2px solid #FFD700"></span>Brawl Stars
+  </button>
+  <button class="theme-btn" data-theme-val="minecraft" onclick="setTheme('minecraft',this)">
+    <span class="theme-preview" style="background:linear-gradient(180deg,#87CEEB 40%,#5CDE20 40%,#5CDE20 60%,#7B5C38 60%)"></span>Minecraft
+  </button>
+  <span style="font-size:11px;color:var(--muted);font-weight:700;margin-left:4px">← Elige el que más te guste</span>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="h-stripe"></div>
+  <div class="h-inner">
+    <div>
+      <div class="h1">⭐ SuperEstudio</div>
+      <div class="h-sub">Tu espacio para estudiar y repasar</div>
+    </div>
+    <button class="h-tut" onclick="openTut()">🎓 Tutorial</button>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav>
+  <button class="tb active" data-t="inicio">🏠 Inicio</button>
+  <button class="tb" data-t="cdm">🌍 C. del Medio</button>
+  <button class="tb" data-t="ingles">🇬🇧 Inglés</button>
+  <button class="tb" data-t="lengua">📚 Lengua</button>
+  <button class="tb" data-t="musica">🎵 Música</button>
+  <button class="tb" data-t="mates">🔢 Matemáticas</button>
+  <button class="tb" data-t="generales">⭐ Para Todo</button>
+  <button class="tb" data-t="ia">🤖 Profe-Bot</button>
+</nav>
+
+<!-- MAIN -->
+<main>
+
+<!-- ── INICIO ── -->
+<div class="tc active" id="tab-inicio">
+  <div class="greet" id="greet-bar">
+    <span id="greet-ico" style="font-size:36px">👋</span>
+    <div>
+      <h2 id="greet-title">¡Hola, campeón/a!</h2>
+      <p id="greet-sub">Elige la asignatura que toca hoy y ¡a por ello!</p>
+    </div>
+  </div>
+
+  <div class="dash">
+    <div class="dw dw-date">
+      <div class="dw-lbl">📅 Hoy es</div>
+      <div class="date-big" id="d-day">—</div>
+      <div class="date-week" id="d-week">—</div>
+      <div class="date-month" id="d-month">—</div>
+    </div>
+
+    <div class="dw dw-weather">
+      <div class="dw-lbl">🌤️ El tiempo</div>
+      <div id="w-area"><span style="font-size:13px;color:var(--muted);font-weight:700">Cargando… ⏳</span></div>
+    </div>
+
+    <div class="dw dw-cal">
+      <div class="dw-lbl">📅 Mis pruebas · Toca un día para apuntar una</div>
+      <div class="cal-hd">
+        <button class="cal-nav" id="cal-prev">‹</button>
+        <h3 id="cal-title">—</h3>
+        <button class="cal-nav" id="cal-next">›</button>
+      </div>
+      <div class="cal-grid" id="cal-grid"></div>
+    </div>
+
+    <div class="dw dw-countdown">
+      <div class="dw-lbl">⏰ Próxima prueba</div>
+      <div id="cd-area"><span class="cd-none">No hay pruebas apuntadas todavía. ¡Añade una en el calendario! 📅</span></div>
+    </div>
+
+    <div class="dw dw-quote" style="grid-column:2;grid-row:2">
+      <div class="dw-lbl">💪 Frase del día</div>
+      <div class="q-text" id="q-text"></div>
+      <div class="q-auth" id="q-auth"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ── CDM ── -->
+<div class="tc" id="tab-cdm">
+  <div class="sh"><span class="sh-ico">🌍</span><div><h2 style="color:var(--cdm)">Conocimiento del Medio</h2><p>Ciencias, naturaleza, historia y sociedad</p></div></div>
+  <div class="cg" id="g-cdm"></div>
+</div>
+
+<!-- ── INGLÉS ── -->
+<div class="tc" id="tab-ingles">
+  <div class="sh"><span class="sh-ico">🇬🇧</span><div><h2 style="color:var(--eng)">Inglés</h2><p>Verbos, vocabulario y pruebas</p></div></div>
+  <div class="cg" id="g-ingles"></div>
+</div>
+
+<!-- ── LENGUA ── -->
+<div class="tc" id="tab-lengua">
+  <div class="sh"><span class="sh-ico">📚</span><div><h2 style="color:var(--len)">Lengua</h2><p>Castellano y Valenciano</p></div></div>
+  <div class="cg" id="g-lengua"></div>
+</div>
+
+<!-- ── MÚSICA ── -->
+<div class="tc" id="tab-musica">
+  <div class="sh"><span class="sh-ico">🎵</span><div><h2 style="color:var(--mus)">Música</h2><p>Practica y mejora en casa</p></div></div>
+  <div class="cg" id="g-musica"></div>
+</div>
+
+<!-- ── MATEMÁTICAS ── -->
+<div class="tc" id="tab-mates">
+  <div class="sh"><span class="sh-ico">🔢</span><div><h2 style="color:var(--mat)">Matemáticas</h2><p>Cálculo, problemas, geometría y más</p></div></div>
+  <div class="cg" id="g-mates"></div>
+</div>
+
+<!-- ── GENERALES ── -->
+<div class="tc" id="tab-generales">
+  <div class="sh"><span class="sh-ico">⭐</span><div><h2 style="color:var(--gen)">Para Cualquier Asignatura</h2><p>Trucos que funcionan con todo</p></div></div>
+  <div class="cg" id="g-generales"></div>
+</div>
+
+<!-- ── PROFE-BOT ── -->
+<div class="tc" id="tab-ia">
+  <div class="sh"><span class="sh-ico">🤖</span><div><h2 style="color:var(--ia-d)">Profe-Bot · Para Familias</h2><p>Pedid recursos de estudio personalizados: pruebas, memorys, dictados, sopas de letras…</p></div></div>
+
+  <p class="ia-p">¡Bienvenidas, familias! Haced clic en el botón de abajo para abrir <b>Profe-Bot</b> directamente en Google Gemini. No hace falta instalar nada ni registrarse si ya tenéis cuenta de Google. 👇</p>
+
+  <div style="text-align:center;margin:28px 0 36px">
+    <a id="profebot-link" href="https://gemini.google.com/gem/1An9Xxm-GZVFPquBB163BUHhWGBUJ9eDQ?usp=sharing" target="_blank" rel="noopener"
+      style="display:inline-flex;align-items:center;gap:12px;background:var(--ia);color:white;
+             padding:18px 32px;border-radius:var(--btn-radius);font-family:var(--display-font);
+             font-size:20px;text-decoration:none;box-shadow:4px 4px 0 var(--ia-d);transition:.15s">
+      🤖 Abrir Profe-Bot
+    </a>
+    <p style="margin-top:14px;font-size:12.5px;color:var(--muted);font-weight:700">
+      Se abre en Google Gemini · Necesita cuenta de Google gratuita
+    </p>
+  </div>
+
+  <h3 class="ia-h">🛠️ Más herramientas gratuitas</h3>
+  <p class="ia-p">Si queréis explorar más opciones, aquí tenéis las más sencillas para familias. Sin instalaciones ni conocimientos técnicos.</p>
+
+  <div class="tool-acc">
+
+    <!-- GRUPO 1: IAs para crear recursos -->
+    <div class="tacc" onclick="this.classList.toggle('open')">
+      <div class="tacc-hd">
+        <span class="tacc-ico">🤖</span>
+        <div class="tacc-title">Asistentes IA para crear recursos
+          <div class="tacc-sub">Pídeles pruebas, memorys, dictados, sopas de letras… en segundos</div>
+        </div>
+        <span class="tacc-arr">▼</span>
+      </div>
+      <div class="tacc-body"><div class="tacc-list">
+        <a class="titem" href="https://chat.openai.com" target="_blank" rel="noopener">
+          <span class="titem-ico">💬</span>
+          <div class="titem-info">
+            <div class="titem-name">ChatGPT</div>
+            <div class="titem-desc">Escríbele lo que necesitas y lo genera al instante. El más popular y fácil de usar.</div>
+          </div>
+          <span class="titem-badge">Gratis</span>
+        </a>
+        <a class="titem" href="https://gemini.google.com" target="_blank" rel="noopener">
+          <span class="titem-ico">🔷</span>
+          <div class="titem-info">
+            <div class="titem-name">Gemini</div>
+            <div class="titem-desc">La IA de Google. Ideal si ya tenéis cuenta de Gmail. Sube fotos del libro directamente.</div>
+          </div>
+          <span class="titem-badge">Gratis</span>
+        </a>
+        <a class="titem" href="https://claude.ai" target="_blank" rel="noopener">
+          <span class="titem-ico">✨</span>
+          <div class="titem-info">
+            <div class="titem-name">Claude</div>
+            <div class="titem-desc">Muy bueno para recursos largos y detallados: crucigramas, fichas de repaso, guiones.</div>
+          </div>
+          <span class="titem-badge">Gratis</span>
+        </a>
+      </div></div>
+    </div>
+
+    <!-- GRUPO 2: Juegos listos para usar -->
+    <div class="tacc" onclick="this.classList.toggle('open')">
+      <div class="tacc-hd">
+        <span class="tacc-ico">🎮</span>
+        <div class="tacc-title">Juegos y actividades listas para jugar
+          <div class="tacc-sub">Sin crear nada — solo buscar el tema y jugar</div>
+        </div>
+        <span class="tacc-arr">▼</span>
+      </div>
+      <div class="tacc-body"><div class="tacc-list">
+        <a class="titem" href="https://wordwall.net/es" target="_blank" rel="noopener">
+          <span class="titem-ico">🃏</span>
+          <div class="titem-info">
+            <div class="titem-name">Wordwall</div>
+            <div class="titem-desc">Busca el tema de tu hijo/a y encuentra quizzes, memorys y sopas de letras ya hechos. Sin cuenta para jugar.</div>
+          </div>
+          <span class="titem-badge">✅ Sin registro</span>
+        </a>
+        <a class="titem" href="https://quizlet.com/es" target="_blank" rel="noopener">
+          <span class="titem-ico">📇</span>
+          <div class="titem-info">
+            <div class="titem-name">Quizlet</div>
+            <div class="titem-desc">Flashcards y juegos de repaso. Hay miles de sets en español para primaria ya creados por otros.</div>
+          </div>
+          <span class="titem-badge">✅ Sin registro</span>
+        </a>
+        <a class="titem" href="https://www.liveworksheets.com" target="_blank" rel="noopener">
+          <span class="titem-ico">📄</span>
+          <div class="titem-info">
+            <div class="titem-name">Liveworksheets</div>
+            <div class="titem-desc">Fichas interactivas que se corrigen solas. Busca el tema en español y tu hijo/a las hace en pantalla.</div>
+          </div>
+          <span class="titem-badge">✅ Sin registro</span>
+        </a>
+        <a class="titem" href="https://kahoot.com" target="_blank" rel="noopener">
+          <span class="titem-ico">🏆</span>
+          <div class="titem-info">
+            <div class="titem-name">Kahoot!</div>
+            <div class="titem-desc">Juego de preguntas en familia con puntuación y colores. Muy motivador. Busca kahoots ya hechos del tema.</div>
+          </div>
+          <span class="titem-badge">Gratis</span>
+        </a>
+      </div></div>
+    </div>
+
+  </div>
+</div>
+
+</main>
+
+<script>
+// ════════════════════════════════════════
+//  THEMES
+// ════════════════════════════════════════
+function setTheme(t,btn){
+  document.documentElement.setAttribute('data-theme',t);
+  document.querySelectorAll('.theme-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  try{localStorage.setItem('se_theme',t);}catch(e){}
+}
+(function(){
+  try{const t=localStorage.getItem('se_theme');if(t){document.documentElement.setAttribute('data-theme',t);document.querySelectorAll('.theme-btn').forEach(b=>{if(b.dataset.themeVal===t)b.classList.add('active');else b.classList.remove('active');});}}catch(e){}
+})();
+
+// ════════════════════════════════════════
+//  TUTORIAL
+// ════════════════════════════════════════
+const TUT_WHO=`<button class="tut-x" onclick="closeTut()">✕ Cerrar</button><span class="tut-ico">🎓</span><h2>¿Quién eres?</h2><p>Dime quién va a leer el tutorial para adaptarlo a ti.</p><div class="who-grid"><button class="who-opt stu" onclick="pickTut('stu')"><span class="wo-ico">🎒</span><div class="wo-t">Soy alumno/a</div><div class="wo-s">Quiero aprender a usar la web yo solo/a</div></button><button class="who-opt par" onclick="pickTut('par')"><span class="wo-ico">👨‍👩‍👧</span><div class="wo-t">Soy familia</div><div class="wo-s">Quiero ver cómo ayudar desde casa</div></button></div>`;
+
+const S_STU=[
+  {i:"👋",h:"¡Bienvenido/a a SuperEstudio!",p:"Aquí puedes repasar y estudiar tú solo/a, sin necesitar que nadie esté contigo todo el rato. ¡Tú tienes el control!"},
+  {i:"🗂️",h:"Elige tu asignatura",p:"Toca cualquier pestaña de arriba: Conocimiento del Medio, Inglés, Lengua, Música o Para Todo. Cada una tiene ideas para estudiar."},
+  {i:"🃏",h:"Abre las tarjetas",p:"Dentro de cada asignatura hay tarjetas. Toca cualquiera para abrirla y ver los pasos. ¡Son facilísimas de seguir!"},
+  {i:"📅",h:"Apunta tus pruebas",p:"En la pantalla de Inicio tienes un calendario. Toca cualquier día para escribir qué examen tienes. Así no se te olvida cuándo tienes que estudiar."},
+  {i:"⏰",h:"Cuenta atrás",p:"Debajo del calendario verás cuántos días faltan para tu próxima prueba. ¡Para que no llegues con prisas!"},
+  {i:"🚀",h:"¡Todo listo!",p:"Ya sabes cómo funciona. Elige una asignatura y ¡a por ello! ¿A qué esperas? 💪"},
+];
+const S_PAR=[
+  {i:"👨‍👩‍👧",h:"¡Hola, familia! Bienvenidos",p:"SuperEstudio es una web para que vuestro hijo/a estudie solo/a. También tiene un asistente que os ayuda a vosotros a crear recursos de repaso."},
+  {i:"🔐",h:"La contraseña de Profe-Bot es: 0000",p:"La sección de Profe-Bot está protegida para que sólo entréis vosotros. La contraseña es 0000. Guardadla para que sólo la tengáis vosotros."},
+  {i:"🤖",h:"¿Cómo usar Profe-Bot?",p:"En la pestaña 'Profe-Bot' encontraréis un botón grande. Al hacer clic se abre Profe-Bot directamente en Google Gemini. Necesitáis una cuenta de Google gratuita (la misma de Gmail)."},
+  {i:"💬",h:"¿Qué podéis pedirle?",p:"Escribid lo que necesitáis, por ejemplo: 'Quiero una prueba tipo test sobre los ecosistemas'. Profe-Bot lo prepara en segundos. También podéis subir fotos del libro directamente en Gemini."},
+  {i:"🎨",h:"Cambia el estilo",p:"Arriba del todo hay tres estilos de diseño: Papel, Colores y Bosque. Cambia el que más os guste vosotros y vuestro hijo/a."},
+  {i:"🏠",h:"¡Todo listo!",p:"Vuestro hijo/a puede usar las pestañas de asignaturas solo/a. Y vosotros podéis pedirle recursos a Profe-Bot cuando lo necesitéis. ¡A por ello! 🚀"},
+];
+
+let tSteps=[],tIdx=0;
+function openTut(){document.getElementById('tut-ov').classList.remove('off');document.getElementById('tut-card').innerHTML=TUT_WHO;}
+function closeTut(){document.getElementById('tut-ov').classList.add('off');tSteps=[];tIdx=0;try{localStorage.setItem('se_tut','1');}catch(e){}}
+function pickTut(m){tSteps=m==='stu'?S_STU:S_PAR;tIdx=0;renderStep();}
+function renderStep(){
+  const s=tSteps[tIdx],n=tSteps.length;
+  const dots=tSteps.map((_,i)=>`<div class="tdot${i===tIdx?' on':''}"></div>`).join('');
+  document.getElementById('tut-card').innerHTML=`<button class="tut-x" onclick="closeTut()">✕ Cerrar</button><span class="tut-ico">${s.i}</span><h2>${s.h}</h2><p>${s.p}</p><div class="tut-dots">${dots}</div><div class="tut-btns">${tIdx>0?'<button class="tbtn sec" onclick="tN(-1)">← Atrás</button>':''}${tIdx<n-1?'<button class="tbtn pri" onclick="tN(1)">Siguiente →</button>':'<button class="tbtn pri" onclick="closeTut()">¡Empezamos! 🚀</button>'}</div>`;
+}
+function tN(d){tIdx=Math.max(0,Math.min(tSteps.length-1,tIdx+d));renderStep();}
+window.addEventListener('DOMContentLoaded',()=>{try{if(!localStorage.getItem('se_tut'))openTut();}catch(e){}});
+document.getElementById('tut-ov').addEventListener('click',e=>{if(e.target===document.getElementById('tut-ov'))closeTut();});
+
+// ════════════════════════════════════════
+//  PASSWORD
+// ════════════════════════════════════════
+let _iaReady=false;
+document.querySelector('[data-t="ia"]').addEventListener('click',e=>{
+  e.stopPropagation();
+  if(sessionStorage.getItem('pb_ok')==='1'){goTab('ia');return;}
+  _iaReady=true;
+  document.getElementById('pw-ov').classList.remove('off');
+  setTimeout(()=>document.getElementById('pw-inp').focus(),80);
+},{capture:true});
+
+function checkPw(){
+  const v=document.getElementById('pw-inp').value.trim();
+  const err=document.getElementById('pw-err');
+  if(v==='0000'){
+    sessionStorage.setItem('pb_ok','1');
+    document.getElementById('pw-ov').classList.add('off');
+    document.getElementById('pw-inp').value='';err.textContent='';
+    if(_iaReady){goTab('ia');_iaReady=false;}
+  } else {
+    err.textContent='Contraseña incorrecta. Inténtalo de nuevo.';
+    const i=document.getElementById('pw-inp');
+    i.classList.add('err');i.value='';
+    setTimeout(()=>i.classList.remove('err'),400);i.focus();
+  }
+}
+function cancelPw(){document.getElementById('pw-ov').classList.add('off');document.getElementById('pw-inp').value='';document.getElementById('pw-err').textContent='';_iaReady=false;}
+document.getElementById('pw-inp').addEventListener('keydown',e=>{if(e.key==='Enter')checkPw();});
+
+// ════════════════════════════════════════
+//  DASHBOARD
+// ════════════════════════════════════════
+const DAYS_ES=['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
+const DSRT=['L','M','X','J','V','S','D'];
+const MON_ES=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+const WIC={'Sunny':'☀️','Clear':'🌙','Partly cloudy':'⛅','Cloudy':'☁️','Overcast':'☁️','Rain':'🌧️','Light rain':'🌦️','Drizzle':'🌦️','Heavy rain':'🌧️','Patchy rain nearby':'🌦️','Snow':'❄️','Light snow':'🌨️','Fog':'🌫️','Mist':'🌫️','Thundery outbreaks possible':'⛈️','Thunder':'⛈️'};
+const QUOTES=[
+  {t:'El que estudia hoy, elige mañana.',a:'Proverbio'},
+  {t:'Cada experto/a fue un día un principiante.',a:'Helen Hayes'},
+  {t:'El esfuerzo de hoy es el éxito de mañana.',a:''},
+  {t:'No cuentes los días, haz que los días cuenten.',a:'Muhammad Ali'},
+  {t:'Lo que siembras hoy, lo cosechas mañana.',a:'Proverbio'},
+  {t:'Un poco de progreso cada día suma grandes resultados.',a:''},
+  {t:'¡Tú puedes! Solo necesitas empezar.',a:''},
+  {t:'El éxito es la suma de pequeños esfuerzos repetidos cada día.',a:'R. Collier'},
+  {t:'Aprender es un tesoro que te acompaña a todas partes.',a:'Proverbio chino'},
+  {t:'La constancia es la madre de todas las virtudes.',a:'Proverbio'},
+  {t:'Hoy es un buen día para aprender algo nuevo.',a:''},
+  {t:'Los grandes logros requieren tiempo y esfuerzo.',a:''},
+  {t:'No te rindas. Los grandes genios también se equivocaron.',a:''},
+  {t:'Cada página que lees es un paso hacia adelante.',a:''},
+  {t:'El conocimiento pesa poco pero vale mucho.',a:''},
+];
+const GREETS=[
+  {i:'☀️',t:'¡Buenos días, campeón/a!',s:'¿Qué asignatura toca repasar hoy?'},
+  {i:'🌤️',t:'¡Buenas tardes!',s:'Un buen momento para repasar. ¡Tú puedes con todo!'},
+  {i:'🌅',t:'¡Buenas tardes!',s:'Ya casi termina el día. ¡Un último esfuerzo y listo!'},
+  {i:'🌙',t:'¡Buenas noches!',s:'Un repasito rápido antes de dormir puede marcar la diferencia.'},
+];
+
+function initDash(){
+  const now=new Date();const h=now.getHours();
+  const g=GREETS[h<13?0:h<17?1:h<21?2:3];
+  document.getElementById('greet-ico').textContent=g.i;
+  document.getElementById('greet-title').textContent=g.t;
+  document.getElementById('greet-sub').textContent=g.s;
+  const doy=Math.floor((now-new Date(now.getFullYear(),0,0))/864e5);
+  document.getElementById('d-day').textContent=now.getDate();
+  document.getElementById('d-week').textContent=DAYS_ES[now.getDay()];
+  document.getElementById('d-month').textContent=`${MON_ES[now.getMonth()]} ${now.getFullYear()}`;
+  const q=QUOTES[doy%QUOTES.length];
+  document.getElementById('q-text').textContent=`"${q.t}"`;
+  document.getElementById('q-auth').textContent=q.a?`— ${q.a}`:'';
+  fetchWeather();
+  updateCountdown();
+}
+
+async function fetchWeather(){
+  const el=document.getElementById('w-area');
+  try{
+    const r=await fetch('https://wttr.in/Castelló+de+la+Plana?format=j1');
+    if(!r.ok)throw 0;
+    const d=await r.json();
+    const c=d.current_condition[0];
+    const t=c.temp_C,desc=c.weatherDesc[0].value;
+    const ico=WIC[desc]||(+t>22?'☀️':+t>14?'⛅':'🌥️');
+    el.innerHTML=`<div class="w-row"><div class="w-ico">${ico}</div><div><div class="w-temp">${t}°</div><div class="w-desc">${desc}</div><div class="w-city">📍 Castelló de la Plana</div></div></div>`;
+  }catch{el.innerHTML=`<div class="w-row"><div class="w-ico">🌤️</div><div><div class="w-temp">—°</div><div class="w-desc">No disponible</div><div class="w-city">📍 Castelló</div></div></div>`;}
+}
+
+// ════════════════════════════════════════
+//  CALENDAR & EXAMS (multi per day)
+// ════════════════════════════════════════
+let cY=new Date().getFullYear(),cM=new Date().getMonth(),emKey='';
+
+// Storage: { "YYYY-MM-DD": ["Prueba A","Prueba B", ...] }
+// Migrates old string format automatically
+function getExams(){
+  try{
+    const raw=JSON.parse(localStorage.getItem('se_exams')||'{}');
+    // migrate: if any value is a string, convert to array
+    Object.keys(raw).forEach(k=>{if(typeof raw[k]==='string')raw[k]=[raw[k]];});
+    return raw;
+  }catch{return {};}
+}
+function saveExams(o){try{localStorage.setItem('se_exams',JSON.stringify(o));}catch{}}
+
+// ── COUNTDOWN (all upcoming, sorted) ──
+function updateCountdown(){
+  const exams=getExams();
+  const today=new Date();today.setHours(0,0,0,0);
+  // flatten to [{date, name}]
+  const upcoming=[];
+  Object.entries(exams).forEach(([k,arr])=>{
+    const d=new Date(k);
+    if(d>=today)(arr||[]).forEach(n=>upcoming.push({date:d,key:k,name:n}));
+  });
+  upcoming.sort((a,b)=>a.date-b.date);
+
+  const el=document.getElementById('cd-area');
+  if(!upcoming.length){
+    el.innerHTML='<span class="cd-none">No hay pruebas apuntadas todavía.<br>¡Añade una en el calendario! 📅</span>';
+    return;
+  }
+  const rows=upcoming.map(ev=>{
+    const diff=Math.round((ev.date-today)/(1000*60*60*24));
+    let pill,sub;
+    if(diff===0){pill=`<div class="cd-item-days today-pill">¡HOY!</div>`;sub='¡Mucho ánimo! 🎯';}
+    else if(diff===1){pill=`<div class="cd-item-days">1</div>`;sub='día · ¡Es mañana!';}
+    else{pill=`<div class="cd-item-days">${diff}</div>`;sub=`día${diff>1?'s':''} hasta la prueba`;}
+    return `<div class="cd-item">${pill}<div class="cd-item-info"><div class="cd-item-name">${ev.name}</div><div class="cd-item-sub">${sub}</div></div></div>`;
+  }).join('');
+  el.innerHTML=`<div class="cd-scroll">${rows}</div>`;
+}
+
+// ── RENDER CALENDAR ──
+function renderCal(){
+  const now=new Date();
+  document.getElementById('cal-title').textContent=`${MON_ES[cM].charAt(0).toUpperCase()+MON_ES[cM].slice(1)} ${cY}`;
+  const grid=document.getElementById('cal-grid');grid.innerHTML='';
+  DSRT.forEach(d=>{const h=document.createElement('div');h.className='cal-dh';h.textContent=d;grid.appendChild(h);});
+  const start=(new Date(cY,cM,1).getDay()+6)%7;
+  for(let i=0;i<start;i++){const e=document.createElement('div');e.className='cal-d empty';grid.appendChild(e);}
+  const total=new Date(cY,cM+1,0).getDate();
+  const exams=getExams();
+  const todayStr=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
+  for(let d=1;d<=total;d++){
+    const el=document.createElement('div');el.className='cal-d';
+    const key=`${cY}-${String(cM+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const isToday=key===todayStr;
+    const isPast=new Date(cY,cM,d)<new Date(now.getFullYear(),now.getMonth(),now.getDate());
+    if(isToday)el.classList.add('today');
+    if(isPast&&!isToday)el.classList.add('past');
+    const num=document.createElement('span');num.className='cal-num';num.textContent=d;el.appendChild(num);
+    const list=exams[key]||[];
+    if(list.length){
+      el.classList.add('has-exam');
+      list.slice(0,2).forEach(name=>{
+        const lbl=document.createElement('span');lbl.className='cal-exam-lbl';lbl.textContent=name;el.appendChild(lbl);
+      });
+      if(list.length>2){
+        const more=document.createElement('span');more.className='cal-exam-lbl';
+        more.textContent=`+${list.length-2} más`;el.appendChild(more);
+      }
+    }
+    el.addEventListener('click',()=>openEM(key,d));
+    grid.appendChild(el);
+  }
+}
+
+// ── EXAM MODAL ──
+function openEM(key,day){
+  emKey=key;
+  document.getElementById('em-lbl').textContent=`${day} de ${MON_ES[cM]} de ${cY}`;
+  document.getElementById('em-inp').value='';
+  renderEMList();
+  document.getElementById('exam-modal').classList.remove('off');
+  setTimeout(()=>document.getElementById('em-inp').focus(),80);
+}
+
+function renderEMList(){
+  const exams=getExams();
+  const list=exams[emKey]||[];
+  const el=document.getElementById('em-list');
+  if(!list.length){
+    el.innerHTML='<div class="em-empty">No hay pruebas apuntadas para este día aún.</div>';
+    return;
+  }
+  el.innerHTML=list.map((name,i)=>
+    `<div class="em-item">
+      <span class="em-item-txt">${name}</span>
+      <button class="em-item-del" onclick="deleteExamItem(${i})" title="Borrar esta prueba">✕</button>
+    </div>`
+  ).join('');
+}
+
+function addExam(){
+  const v=document.getElementById('em-inp').value.trim();
+  if(!v||!emKey)return;
+  const exams=getExams();
+  if(!exams[emKey])exams[emKey]=[];
+  exams[emKey].push(v);
+  saveExams(exams);
+  document.getElementById('em-inp').value='';
+  renderEMList();renderCal();updateCountdown();
+  document.getElementById('em-inp').focus();
+}
+
+function deleteExamItem(idx){
+  if(!emKey)return;
+  const exams=getExams();
+  if(!exams[emKey])return;
+  exams[emKey].splice(idx,1);
+  if(!exams[emKey].length)delete exams[emKey];
+  saveExams(exams);renderEMList();renderCal();updateCountdown();
+}
+
+function closeEM(){document.getElementById('exam-modal').classList.add('off');emKey='';}
+document.getElementById('em-inp').addEventListener('keydown',e=>{if(e.key==='Enter')addExam();if(e.key==='Escape')closeEM();});
+document.getElementById('cal-prev').addEventListener('click',()=>{cM--;if(cM<0){cM=11;cY--;}renderCal();});
+document.getElementById('cal-next').addEventListener('click',()=>{cM++;if(cM>11){cM=0;cY++;}renderCal();});
+
+// ════════════════════════════════════════
+//  CARDS DATA
+// ════════════════════════════════════════
+const D={
+  cdm:[
+    {e:"📝",t:"Simulacro de prueba",q:"Practica como si fuera el examen de verdad",s:["Cierra el libro y todos los apuntes, sin mirar nada.","Responde las preguntas que recuerdes.","Corrígelo con el libro y anota exactamente lo que has fallado.","Repasa SÓLO eso y vuelve a intentarlo al día siguiente."],tip:"💡 Si fallas algo, no te rindas. Repasa ese punto y vuelve a intentarlo."},
+    {e:"🗣️",t:"Leer y preguntas orales",q:"Lees la teoría y alguien te pregunta después",s:["Lee el tema una o dos veces con atención.","Cierra el libro sin mirar.","Un familiar, hermano/a o tu peluche favorito te hace preguntas.","Lo que no sepas, vuelve a leer SÓLO esa parte."],tip:"💡 Turnaros: tú preguntas primero y luego te preguntan a ti."},
+    {e:"🔍",t:"Marca lo importante",q:"Subraya lo clave y descarta el resto",s:["Lee el texto entero una vez sin subrayar nada todavía.","Vuelve a leer y subraya las palabras o frases esenciales.","Lee sólo lo subrayado: ¿tiene sentido completo?","Escribe un resumen breve con tus propias palabras."],tip:"💡 Usa dos colores: amarillo para lo muy importante, azul para los ejemplos."},
+    {e:"🎬",t:"Sé YouTuber del tema",q:"Prepara un guion y grábate explicando",s:["Estudia el tema hasta que lo entiendas bien.","Escribe un guion con los 4-5 puntos más importantes.","Grábate explicándolo como si tuvieras miles de suscriptores.","Mira el vídeo y comprueba si te has dejado algo importante."],tip:"💡 ¡Puedes añadir un título en pantalla y elegir un fondo chulo!"},
+    {e:"🧸",t:"Haz de profe en casa",q:"Explícaselo a tus peluches, padres o hermanos/as",s:["Sienta a tus peluches (¡o a tu familia!) como si fueran tus alumnos/as.","Explícales el tema entero con tus palabras.","Si alguien 'no entiende', explícalo de otra manera.","Hazles preguntas al final para comprobar que lo han 'aprendido'."],tip:"💡 Si puedes explicarlo, es que de verdad lo sabes. ¡Este truco es de los mejores!"},
+    {e:"📋",t:"Prueba para papás y mamás",q:"Tú creas el examen y ellos lo hacen",s:["Estudia el tema muy bien primero.","Crea una prueba de 5-8 preguntas para tu familia.","¡Corrígela tú! Ahora eres el/la profe de casa.","Explícales las respuestas correctas si han fallado."],tip:"💡 Puede ser tipo test, verdadero/falso o preguntas abiertas. ¡O los tres!"},
+    {e:"🗺️",t:"Mapa mental de colores",q:"Organiza ideas con dibujos, flechas y colores",s:["Escribe el TEMA en letras grandes en el centro del folio.","Dibuja ramas de colores, una por subtema principal.","En cada rama añade palabras clave o dibujitos.","Cuélgalo en tu cuarto y míralo cada vez que pases."],tip:"💡 Cuanto más visual y colorido, mejor lo recordarás. ¡No tiene que ser perfecto!"},
+    {e:"🃏",t:"Tarjetas pregunta-respuesta",q:"Crea tus propias flashcards en papel",s:["Recorta papelitos iguales o usa post-its de colores.","Por una cara: UNA pregunta del tema.","Por la otra cara: la respuesta.","Practica: mira la pregunta e intenta responder antes de girar."],tip:"💡 Separa las que ya sabes. Practica más las difíciles hasta dominarlas."},
+    {e:"🖍️",t:"Cómic del tema",q:"Dibuja el tema como si fuera un tebeo",s:["Divide un folio en 6-8 viñetas (recuadros).","En cada viñeta dibuja y escribe una parte del tema.","Usa globos de diálogo y personajes divertidos.","Léelo como un cómic cuando repases."],tip:"💡 Al crear el cómic ya estás repasando. ¡Y luego tienes un recurso genial para volver a él!"},
+    {e:"📌",t:"Post-its por la casa",q:"Pon los conceptos difíciles donde más los veas",s:["Escribe los conceptos difíciles en post-its.","Pégalos donde los veas mucho: nevera, espejo, puerta.","Cada vez que los veas, léelos en voz alta.","Cuando los sepas de memoria, retira el post-it. ¡Victoria!"],tip:"💡 Añade un pequeño dibujo al post-it para recordarlo todavía mejor."},
+    {e:"✅",t:"Verdadero o Falso en familia",q:"Un juego rápido con preguntas del tema",s:["Un familiar dice afirmaciones (unas verdaderas, otras falsas).","Tienes 5 segundos para responder: verdadero o falso.","Si aciertas: punto. Si fallas: explica la respuesta correcta.","Luego cambiáis: tú lees y ellos responden."],tip:"💡 10 segundos de tiempo límite para añadir emoción. ¡El que más puntos gana!"},
+    {e:"📖",t:"El cuento del tema",q:"Convierte los conceptos en personajes de una historia",s:["Lee el tema una vez para entenderlo.","Inventa una historia donde los conceptos sean personajes o lugares.","Ej: 'Las raíces eran los pies de la planta, que bebían agua del suelo…'","Cuéntasela a alguien de memoria."],tip:"💡 Las historias se recuerdan mejor que los datos sueltos: el cerebro está diseñado para procesar narrativas."},
+    {e:"🎙️",t:"Podcast del tema",q:"Grábate como si hicieras un programa de radio",s:["Imagina que tienes un podcast educativo sobre el tema.","Grábate contándolo con datos curiosos y ejemplos divertidos.","Escúchate: ¿has explicado todo bien?","Ponlo mientras desayunas para repasar sin esfuerzo."],tip:"💡 Usa un tono divertido: haz preguntas, añade datos sorprendentes."}
+  ],
+  ingles:[
+    {e:"✍️",t:"Leer y escribir los verbos",q:"La repetición hace al maestro/a",s:["Lee los verbos en voz alta varias veces.","Tápalos y escríbelos de memoria en un papel aparte.","Comprueba si están bien. Los fallados: escríbelos 3 veces.","Repite hasta que todos te salgan del tirón."],tip:"💡 Escribe cada verbo 3 veces seguidas: tu mano también los memoriza."},
+    {e:"📝",t:"Simulacro de prueba",q:"Practica como si fuera el examen real",s:["Prepara una prueba parecida al examen.","Hazla sin mirar apuntes y con tiempo límite.","Corrígela y apunta qué partes necesitas repasar.","Repite días después para comprobar si has mejorado."],tip:"💡 Hazla en el mismo tiempo que tendrás en el examen. ¡El cronómetro añade realismo!"},
+    {e:"🧸",t:"Haz de profe en inglés",q:"Explica los verbos a tus peluches ¡en inglés!",s:["Pon los peluches delante como si fueran tus alumnos/as.","Explica los verbos en inglés con frases de ejemplo.","Hazles preguntas y respóndelas tú mismo/a.","Cuantas más frases practiques, mejor."],tip:"💡 No te preocupes si pronuncias raro. ¡Lo importante es practicar sin miedo!"},
+    {e:"🃏",t:"Memory de verbos",q:"Crea tu propio juego de parejas",s:["Recorta papeles iguales.","En unos: el verbo en inglés. En otros: su traducción.","Boca abajo, dad la vuelta de dos en dos buscando parejas.","¡Quien encuentre más parejas, gana!"],tip:"💡 También puedes hacerlo con: verbo inglés / dibujo de la acción."},
+    {e:"🎨",t:"Tarjeta verbo + dibujo",q:"Un lado el verbo escrito, el otro un dibujo tuyo",s:["Por una cara: el verbo en inglés bien grande.","Por la otra cara: dibuja la acción del verbo.","Practica: mira el dibujo e intenta decir el verbo. ¡O al revés!","¡Baraja las tarjetas para practicar en orden aleatorio!"],tip:"💡 Los dibujos no tienen que ser perfectos. ¡Dibujar ya ayuda a memorizar!"},
+    {e:"📌",t:"Post-its en inglés por casa",q:"Aprende vocabulario sin darte cuenta",s:["Escribe en inglés los nombres de objetos de casa: window, door, fridge…","Pega el papelito encima de cada objeto.","Cada vez que pases por delante, dilo en inglés en voz alta.","Cuando lo sepas de memoria, quita el papel. ¡Victoria!"],tip:"💡 Sin aplicaciones ni registro: solo papel y bolígrafo."},
+    {e:"❓",t:"¿Cómo se dice? El juego del día",q:"Un juego para toda la familia, en cualquier lugar",s:["Alguien señala cualquier objeto (casa, coche, calle…).","Pregunta: '¿Cómo se dice en inglés?'","5 segundos para responder.","Si no lo sabes: buscadlo juntos y repítelo 3 veces en voz alta."],tip:"💡 ¡Jugadlo en el coche, esperando en cualquier sitio! Sin necesidad de sentarse."},
+    {e:"🎵",t:"Canción de verbos",q:"Inventa una melodía con los verbos",s:["Elige una melodía que te guste mucho.","Adapta los verbos a esa melodía como si fuera una canción.","¡Cántala cada día, hasta en la ducha!","Grábala y escúchala antes de dormir."],tip:"💡 Las canciones se quedan en la memoria mucho mejor que las listas."},
+    {e:"🎤",t:"Doblaje en inglés",q:"Ve tus dibujos sin sonido y habla tú",s:["Pon un capítulo de tus dibujos favoritos que ya te sepas.","Quita el volumen.","Intenta decir en inglés lo que dicen los personajes.","¡Grábate si quieres para escucharte después!"],tip:"💡 Bluey, Phineas and Ferb o cualquier serie que ya conozcas en versión original en YouTube son perfectas para empezar."},
+    {e:"🎮",t:"El ahorcado de inglés",q:"El clásico con vocabulario del tema",s:["Piensa en un verbo o palabra del tema.","Dibuja las rayas y el poste del ahorcado.","Un familiar va diciendo letras para adivinar.","¡Turnaros para que juguéis todos/as!"],tip:"💡 Jugad siempre con el vocabulario que toca repasar ese día."},
+    {e:"🃏",t:"Cartas de frases",q:"Construye frases con tarjetas sueltas",s:["Escribe cada palabra de una frase en un papelito diferente.","Mezcla los papelitos y ordénalos para formar la frase correcta.","Empieza con 4-5 palabras y ve aumentando.","Puedes jugar contra el reloj: ¿cuánto tardas?"],tip:"💡 Esto entrena vocabulario Y gramática al mismo tiempo. ¡Doble práctica!"}
+  ],
+  lengua:[
+    {e:"📝",t:"Simulacro de prueba",q:"Practica como si fuera el examen de verdad",s:["Consigue o crea un modelo de prueba.","Hazla en tiempo limitado sin mirar nada.","Corrígela y anota exactamente dónde has fallado.","Repasa justo eso y vuelve a intentarlo días después."],tip:"💡 Pide a un familiar que te haga preguntas inventadas. ¡Un pequeño esfuerzo por su parte te ayuda mucho!"},
+    {e:"🔤",t:"Memorizar y repetir",q:"Para reglas de ortografía y gramática",s:["Lee la regla y sus ejemplos 2-3 veces en voz alta.","Ciérralo e intenta repetirlo de memoria.","Escríbelo sin mirar. ¿Ha salido todo?","Repite lo que no te ha salido hasta que lo domines."],tip:"💡 Aprende siempre con ejemplos, no sólo las reglas sueltas. Los ejemplos se recuerdan mejor."},
+    {e:"✍️",t:"Dictado en familia",q:"Un familiar te dicta y tú escribes",s:["Un familiar dicta 10-15 frases con las palabras del tema.","Escríbelas con atención: tildes, mayúsculas, letras difíciles…","Corrígelo juntos con los apuntes.","Repite sólo las palabras que has fallado."],tip:"💡 Poned puntuación: 1 punto por palabra correcta. ¡Intentad batir el récord cada vez! 🏆"},
+    {e:"📖",t:"Cuento con palabras difíciles",q:"Escribe un cuento usando las palabras del tema",s:["Anota todas las palabras difíciles de ortografía que entran.","Inventa un cuento corto donde aparezcan TODAS.","Léeselo a alguien de tu familia.","Subraya las palabras del tema dentro del cuento."],tip:"💡 Cuanto más raro y divertido sea el cuento, mejor lo recordarás. 🐲"},
+    {e:"🎯",t:"El juego de los 10 errores",q:"Pon errores en un texto y que los encuentren",s:["Copia un párrafo del libro pero introduce 10 errores.","Un familiar tiene que encontrar todos los errores.","Tú eres el árbitro: sabes dónde están todos.","Luego cambiáis: ellos ponen los errores para ti."],tip:"💡 Para poner errores tienes que saber la regla correcta. ¡Doble repaso sin darte cuenta!"},
+    {e:"🔡",t:"Sopa de letras casera",q:"Crea tu propia sopa de letras",s:["En papel cuadriculado dibuja una cuadrícula de 10×10.","Esconde dentro las palabras del tema.","Rellena el resto con letras al azar.","¡Pásasela a un familiar para que busque las palabras!"],tip:"💡 Crear la sopa ya es repasar. ¡Y te queda un juego para toda la familia!"},
+    {e:"🏆",t:"Frases locas pero correctas",q:"Practica gramática con frases absurdas",s:["Elige la regla que quieres practicar.","Inventa la frase más RARA posible que la cumpla.","Compártela con tu familia y reíd juntos.","Si cumple la regla: ¡punto conseguido!"],tip:"💡 Ej: 'El elefante verde come calcetines morados'. ¡Así no se olvida! 🐘"},
+    {e:"🗺️",t:"Mapa mental de gramática",q:"Organiza las reglas con un mapa visual",s:["En el centro escribe el tema (ej: 'LAS TILDES').","Dibuja ramas con los tipos de reglas, cada una de un color.","En cada rama añade 1-2 ejemplos concretos.","Pon el mapa en la pared y míralo cada vez que pases."],tip:"💡 Sin darte cuenta, lo repasarás decenas de veces al día."},
+    {e:"❌",t:"El ahorcado de lengua",q:"El clásico con vocabulario o conceptos",s:["Piensa en una palabra difícil o concepto gramatical.","Dibuja las rayas y el poste del ahorcado.","Un familiar intenta adivinar letra a letra.","¡Turnaros y el que más adivine, gana!"],tip:"💡 También podéis jugar con familias de palabras, sinónimos, tipos de oraciones…"}
+  ],
+  musica:[
+    {e:"🖐️",t:"Calentar los dedos",q:"Como los deportistas: ¡a calentar antes de tocar!",s:["Abre y cierra la mano lentamente 10 veces.","Sube y baja por el instrumento sin pensar en notas.","Hazlo despacio durante 1-2 minutos.","¡Ahora sí: empieza a tocar la pieza!"],tip:"💡 Los músicos siempre calientan. Tu mano lo nota y tocas mejor."},
+    {e:"🔁",t:"Tocar y descansar",q:"3-4 veces tocando · 5 minutos de descanso",s:["Toca la pieza completa 3-4 veces seguidas.","Descansa 5 minutos. ¡Te lo has ganado!","Vuelve a tocar 3-4 veces.","Repite este ciclo durante la sesión."],tip:"💡 No toques más de 20 minutos seguidos. ¡El descanso también es estudiar!"},
+    {e:"🎯",t:"Trabaja donde fallas",q:"Identifica el trozo difícil y trabájalo solo",s:["Toca la pieza entera y localiza dónde más te equivocas.","Toca SÓLO ese trozo 5-10 veces, muy despacio.","Poco a poco sube la velocidad.","Cuando te salga bien solo, toca la pieza entera."],tip:"💡 ¡No empieces siempre desde el principio! Los trozos del medio también necesitan práctica."},
+    {e:"🏡",t:"Un poco cada día",q:"15 minutos diarios vale más que 2 horas de golpe",s:["Busca un momento fijo cada día (ej: al merendar).","Toca 15-20 minutos con atención real.","Apunta una ⭐ en el calendario por cada día que practicas.","¡La constancia es el secreto de los grandes músicos!"],tip:"💡 7 días × 15 min = 105 min de práctica. ¡Mucho más que 2 horas un solo día!"},
+    {e:"📱",t:"Grábate tocando",q:"Escúchate para descubrir cómo mejorar",s:["Graba un vídeo o audio de ti mismo/a tocando.","Escúchate o mira el vídeo con atención.","¿Qué partes suenan bien? ¿Dónde fallas?","Practica específicamente los trozos que han sonado peor."],tip:"💡 Los músicos profesionales siempre se graban. ¡Es uno de los trucos más poderosos!"},
+    {e:"👐",t:"Marcar el ritmo con palmas",q:"Aprende el ritmo antes de añadir las notas",s:["Antes de tocar, aprende el ritmo sólo con palmas.","Da palmas siguiendo la partitura, sin tocar el instrumento.","Cuando el ritmo te salga perfecto, añade las notas.","Si hay un trozo difícil de ritmo, practícalo con palmas primero."],tip:"💡 El ritmo es el esqueleto de la música. Si el ritmo está bien, todo suena mejor."},
+    {e:"🐢",t:"La técnica del caracol",q:"Toca MUY despacio para aprenderlo perfecto",s:["Toca el trozo difícil a la MITAD de la velocidad normal.","¿Te sale bien? Súbela un poco.","¿Sigue saliendo? Un poco más rápido.","Sigue subiendo hasta el tempo normal."],tip:"💡 Practicar lento y sin errores enseña al cerebro el movimiento correcto. La velocidad llega sola después."},
+    {e:"🎪",t:"Recital familiar",q:"Toca para tu familia como si fuera un concierto real",s:["Organiza un pequeño concierto en casa: anuncia la fecha.","Prepara bien las piezas que vas a tocar.","Toca delante de tu familia como si fuera un escenario.","¡Que aplaudan! Te lo habrás ganado."],tip:"💡 Tocar delante de alguien te ayuda a manejar los nervios. ¡Práctica real!"},
+    {e:"🎼",t:"Tararear la melodía",q:"Canta la melodía en cualquier momento del día",s:["En cualquier momento, tararea la melodía de tu pieza.","Puedes hacerlo andando, en el coche, en casa…","Si hay un trozo que no recuerdas, búscalo y repásalo.","Cuando puedas cantarla entera de memoria: ¡ya la tienes!"],tip:"💡 Los músicos dicen que una pieza está 'dentro de tu cabeza' cuando puedes cantarla completa."}
+  ],
+  mates:[
+    {e:"🔁",t:"Tablas de multiplicar",q:"La clave es la repetición diaria, no estudiarlas de golpe",s:["Repasa la tabla del día en voz alta, de corrido, varias veces.","Ciérralo y dila de memoria. ¿Algún hueco? Repásalo solo.","Practica al revés: desde ×10 hasta ×1.","Pide que te pregunten al azar: '¿Cuánto es 6×7?'"],tip:"💡 Las multiplicaciones que más suelen costar son 6×7, 7×8 y 8×9. Practícalas por separado hasta que salgan sin pensar."},
+    {e:"📝",t:"Simulacro de prueba",q:"Practica como si fuera el examen de verdad",s:["Busca ejercicios del libro o fichas parecidos a los del examen.","Hazlos sin mirar los apuntes.","Cuando corrijas, fíjate en qué tipo de error has cometido: ¿te has despistado o no entendías cómo se hacía?","Vuelve a hacer los ejercicios fallados al día siguiente."],tip:"💡 En matemáticas importa tanto el proceso como el resultado. Si el error está en un paso concreto, trabaja solo ese paso."},
+    {e:"🧩",t:"Lee el problema paso a paso",q:"Entender qué te piden es la mitad del trabajo",s:["Lee el problema una vez entero, sin escribir nada todavía.","Subraya los números que te dan y rodea con un círculo lo que te piden.","Piensa qué operación necesitas: ¿sumar? ¿restar? ¿multiplicar? ¿dividir?","Calcula, escribe el resultado con su unidad y compruébalo."],tip:"💡 Si no entiendes qué te pide el problema, vuelve a leerlo en voz alta. A veces escucharlo ayuda más que leerlo en silencio."},
+    {e:"✏️",t:"Aprende de los errores",q:"Cada error te indica exactamente dónde estudiar",s:["Abre el ejercicio o prueba corregida.","Para cada error, escribe en un papel qué ha fallado: ¿el cálculo, la operación o la comprensión?","Haz ese mismo ejercicio de nuevo sin mirar la corrección.","Si vuelve a salir mal, pide ayuda específica en ese punto."],tip:"💡 Equivocarse en matemáticas no significa que se te den mal: significa que hay algo concreto que repasar. Todos los matemáticos cometen errores."},
+    {e:"🍕",t:"Fracciones con dibujos",q:"Doblar papel o dibujar pizzas es la mejor manera de entender las fracciones",s:["Coge un folio y dóblalo por la mitad: eso es ½. Dóblalo otra vez: ¼.","Dibuja un círculo (una pizza) y divídelo en partes iguales.","Colorea la fracción que quieres representar: 2/4, 3/8…","Compara: ¿qué fracción es más grande, ½ o ¼? El dibujo te lo dirá."],tip:"💡 Una fracción es una parte de algo. Si divides una pizza en 4 trozos y te comes 1, has comido ¼ de la pizza. Así de sencillo."},
+    {e:"💰",t:"La tienda en casa",q:"El dinero es matemáticas de verdad, en la vida real",s:["Con monedas y billetes de verdad (o recortados de papel), monta una tienda en casa.","Pon precios a objetos: un lápiz cuesta 35 céntimos, un cuaderno 1,20€…","Practica pagar cantidades exactas y dar el cambio correcto.","¿Cuánto cuestan 3 lápices? ¿Cuánto cambio te dan si pagas con 2€?"],tip:"💡 Contar dinero y calcular cambios es multiplicar, sumar y restar con sentido. Y lo más motivador es que es real."},
+    {e:"📏",t:"Medir en casa",q:"La geometría y las medidas están en todos los rincones de casa",s:["Coge una regla o cinta métrica y mide objetos de casa: la mesa, tu cama, un libro.","Anota las medidas en un papel y compáralas: ¿cuál es más largo?","Calcula el perímetro de una habitación: suma todos los lados.","Busca figuras geométricas en casa: ¿qué forma tiene la ventana? ¿y la baldosa?"],tip:"💡 El perímetro es el contorno de una figura: si sumas todos sus lados, tienes el perímetro. Practica con figuras reales."},
+    {e:"📐",t:"Geometría: dibuja antes de calcular",q:"Ver la figura evita la mayoría de los errores",s:["Antes de calcular, dibuja la figura del problema (triángulo, cuadrado, rectángulo…).","Escribe en el dibujo las medidas que te dan.","Calcula el perímetro sumando todos los lados.","Escribe siempre la unidad en el resultado: cm, m, km."],tip:"💡 Un boceto rápido, aunque no sea perfecto, evita confundir los datos. Dibuja siempre."},
+    {e:"🎲",t:"Juego de cálculo rápido",q:"Practica operaciones como si fueran un concurso",s:["Un familiar dice una operación en voz alta: '6×8' o '45+37'.","Tienes 10 segundos para responder mentalmente.","Si aciertas: punto. Si fallas: repásalo juntos.","Probad con distintos tipos: sumas, restas, tablas, divisiones sencillas."],tip:"💡 Convertir la práctica en un juego con puntos hace que la concentración aumente de forma natural."},
+    {e:"🔢",t:"Cálculo mental con objetos del día",q:"Los números están en todas partes: aprovéchalos",s:["Cuando vayas al mercado o al supermercado, estima el precio total.","En el coche, suma los números de las matrículas o resta los de las señales.","En casa, multiplica: '¿Cuántas patas tienen 4 sillas? ¿Y 6?'","Comprueba el resultado después con papel."],tip:"💡 El cálculo mental mejora con la práctica diaria. 5 minutos al día son más efectivos que una hora a la semana."},
+    {e:"🎯",t:"Comprueba el resultado",q:"Revisar el resultado es parte del ejercicio, no un paso opcional",s:["Cuando termines un cálculo, compruébalo de una forma diferente.","Sumas: réstalas. Multiplicaciones: divídelas. División: multiplica el resultado.","Ejemplo: si 4×6=24, comprueba que 24÷4=6.","Si el problema tiene unidad (cm, kg, €), comprueba que el resultado tiene sentido en la vida real."],tip:"💡 En matemáticas siempre hay una forma de verificar. Un resultado que no tiene sentido en la realidad es una señal de error."},
+    {e:"📓",t:"Tarjetas de conceptos y operaciones",q:"Tener claro cada concepto evita confusiones en el examen",s:["Crea tarjetas con los términos del tema: suma, diferencia, producto, cociente…","Por una cara: el nombre y su símbolo (+, -, ×, ÷).","Por la otra: qué significa y un ejemplo con números pequeños.","Repásalas antes de hacer los ejercicios."],tip:"💡 Saber que 'diferencia' significa restar o que 'producto' significa multiplicar vale tanto como saber hacer la operación."},
+    {e:"🖩",t:"Redondea para estimar",q:"Una estimación rápida te dice si el resultado tiene sentido",s:["Antes de resolver, redondea los números a la decena más cercana.","Ejemplo: '13×4 es aproximadamente 10×4=40, así que el resultado rondará 50'.","Calcula el resultado exacto.","¿Se acerca a tu estimación? Si difiere mucho, revisa el cálculo."],tip:"💡 Redondear y estimar antes de calcular es una habilidad que los adultos usan a diario, en el supermercado, en el trabajo, en todas partes."},
+    {e:"🗂️",t:"Agrupa y ordena para entender",q:"Organizar los números ayuda a ver las relaciones entre ellos",s:["Cuando repases un tema, agrupa los ejercicios por tipo: primero sumas, luego restas…","Dentro de cada tipo, ordénalos de más fácil a más difícil.","Empieza siempre por los que ya dominas para coger confianza.","Termina con los más difíciles cuando ya estás en marcha."],tip:"💡 Empezar por lo que ya sabes no es perder el tiempo: activa la mente y genera confianza para lo que viene después."}
+  ],
+  generales:[
+    {e:"🍅",t:"La Técnica Pomodoro",q:"Estudia 20 min · Descansa 5 min · Repite",s:["Pon un temporizador en 20 minutos.","Estudia sin ninguna distracción: nada de móvil, nada de tele.","Cuando suene: 5 minutos de descanso de verdad.","Después de 4 rondas, descansa 15-20 minutos."],tip:"💡 Busca 'temporizador pomodoro' en Google para uno visual y divertido."},
+    {e:"🗣️",t:"La Técnica Feynman",q:"Si puedes explicarlo con tus palabras, es que lo sabes",s:["Estudia el tema hasta entenderlo.","Explícaselo a alguien con tus palabras, sin apuntes, como si esa persona no supiera nada del tema.","Si hay algo que no puedes explicar de forma sencilla, vuelve a estudiarlo.","Sigue hasta poder explicar todo de principio a fin sin trabarte."],tip:"💡 Richard Feynman, Premio Nobel de Física, usaba este método para aprender. La clave es que si no puedes explicarlo de forma simple, es que aún no lo dominas del todo."},
+    {e:"🎨",t:"Mapa mental de colores",q:"Organiza ideas con ramas, colores y dibujitos",s:["Escribe el tema en el centro del folio, bien grande.","Dibuja ramas de colores para cada subtema.","En cada rama añade palabras clave y pequeños dibujos.","Usa al menos 3-4 colores diferentes."],tip:"💡 Los mapas mentales se recuerdan mucho mejor que el texto seguido."},
+    {e:"🌙",t:"Repaso antes de dormir",q:"El cerebro consolida lo que aprendes justo antes de dormir",s:["5 minutos antes de apagar la luz, repasa lo más importante.","Lee tus apuntes o tarjetas muy brevemente.","Cierra los ojos y repite mentalmente los puntos clave.","¡Duerme bien! Tu cerebro seguirá procesando mientras duermes."],tip:"💡 Los científicos han demostrado que dormir después de estudiar mejora la memoria."},
+    {e:"📅",t:"Tabla de estrellas",q:"Marca cada día que estudias y colecciona estrellas",s:["Dibuja una tabla con los días de la semana.","Pon cada asignatura en una fila.","Añade una ⭐ cada vez que estudies esa asignatura.","¡Que no quede ningún día vacío!"],tip:"💡 Ver el progreso escrito es muy motivador. Con el tiempo, el hábito de estudio se consolida solo."},
+    {e:"📌",t:"Post-its por la casa",q:"Pon los conceptos difíciles donde más los veas",s:["Escribe los conceptos difíciles en post-its.","Pégalos donde los veas mucho: nevera, espejo, puerta.","Cada vez que los veas, léelos en voz alta.","Cuando los sepas, retira ese post-it. ¡Victoria!"],tip:"💡 Sin darte cuenta, repasarás el concepto decenas de veces al día."},
+    {e:"🎯",t:"Reto 5-4-3-2-1",q:"Di 5 cosas del tema ¡en 1 minuto!",s:["Uno dice un subtema (ej: 'los animales vertebrados').","Tienes 1 minuto para decir 5 cosas correctas.","Tantos puntos como cosas correctas hayas dicho.","¡Turnaros! El que más puntos acumule, gana."],tip:"💡 Empezad con 3 cosas e id subiendo según lo bien que os lo sabéis."},
+    {e:"🔁",t:"Preguntas encadenadas",q:"Un juego de preguntas en cadena que no para",s:["Uno hace una pregunta sobre el tema.","El siguiente responde y hace OTRA pregunta diferente.","Y así sin parar.","El que no sepa responder en 10 segundos: pierde un punto."],tip:"💡 En el coche, en la cena, en cualquier espera: no hace falta mesa ni silla."},
+    {e:"🏅",t:"Quiz de los campeones",q:"Prepara preguntas tipo test caseras",s:["Escribe 10 preguntas tipo test (4 opciones cada una).","Uno lee las preguntas y los demás responden.","El que más aciertos tenga: ¡campeón/a de la semana!","Guardad el quiz para reutilizarlo otra semana."],tip:"💡 ¡Añadir un pequeño premio lo hace mucho más emocionante!"},
+    {e:"📋",t:"Esquema con tus palabras",q:"Resume el tema en media página",s:["Lee el tema completo una vez.","Cierra el libro.","En media página, escribe los puntos más importantes con tus palabras.","Compara con el libro: ¿qué te has dejado?"],tip:"💡 El acto de escribir con tus propias palabras ya es aprendizaje real."}
+  ]
+};
+
+// ════════════════════════════════════════
+//  CARDS BUILDER
+// ════════════════════════════════════════
+function mkCard(item,cls){
+  const d=document.createElement('div');d.className=`card ${cls}`;
+  d.innerHTML=`<div class="ch"><span class="ce">${item.e}</span><div class="ct-wrap"><div class="ct">${item.t}</div><div class="cq">${item.q}</div></div><span class="ca">▼</span></div><div class="cb"><div class="cb-inner"><div class="steps">${item.s.map((s,i)=>`<div class="step"><span class="sn">${i+1}</span><span class="st">${s}</span></div>`).join('')}</div><div class="tip">${item.tip}</div></div></div>`;
+  d.addEventListener('click',()=>d.classList.toggle('open'));return d;
+}
+[['cdm','g-cdm','cdm'],['ingles','g-ingles','ing'],['lengua','g-lengua','len'],['musica','g-musica','mus'],['mates','g-mates','mat'],['generales','g-generales','gen']].forEach(([k,id,cls])=>{
+  const g=document.getElementById(id);D[k].forEach(item=>g.appendChild(mkCard(item,cls)));
+});
+
+// ════════════════════════════════════════
+//  NAV
+// ════════════════════════════════════════
+function goTab(t){
+  document.querySelectorAll('.tb').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.tc').forEach(c=>c.classList.remove('active'));
+  document.querySelector(`[data-t="${t}"]`).classList.add('active');
+  document.getElementById(`tab-${t}`).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('.tb').forEach(b=>b.addEventListener('click',()=>{
+  if(b.dataset.t==='ia'&&sessionStorage.getItem('pb_ok')!=='1'){
+    _iaReady=true;document.getElementById('pw-ov').classList.remove('off');setTimeout(()=>document.getElementById('pw-inp').focus(),80);return;
+  }
+  goTab(b.dataset.t);
+}));
+
+// ════════════════════════════════════════
+//  PROFE-BOT CHAT  (API FIX)
+// ════════════════════════════════════════
+const SYS=`Eres Profe-Bot, el asistente educativo del aula. Hablas con PADRES Y MADRES, que pueden tener poca experiencia digital.
+
+ESTILO: Respuestas CORTAS y CONCRETAS (máximo 3-4 párrafos pequeños). Tono amigable y cercano, con un punto de humor suave. Lenguaje sencillo, nada de tecnicismos. Usa emojis con moderación. Si generas un recurso: UNO solo, bien hecho, listo para usar. Usa siempre lenguaje inclusivo de género: alumno/a, hijo/a, etc.
+
+RECURSOS QUE PUEDES CREAR: Prueba tipo test (4 opciones, respuestas al final) · Preguntas de repaso · Memory para recortar (tabla 2 columnas) · Sopa de letras · Crucigrama · Flashcards · Verdadero/Falso · Dictado · Trivial familiar · Esquema para completar · Texto con errores para corregir · Guion de YouTuber · Mapa conceptual para rellenar.
+
+AL CREAR UN RECURSO: Instrucciones breves al principio para uso autónomo del alumno/a. Frase motivadora al final con ⭐. Formato claro, listo para leer o imprimir. Memory/Flashcards: tabla de 2 columnas.
+
+SI SUBEN UNA IMAGEN O PDF: úsalo como base para el recurso. Menciona brevemente que has visto el contenido adjunto.
+
+SI NO SABEN EL TEMA: pregunta sólo UNA cosa: el tema específico.
+
+SOBRE EL PROFE RAÚL: Es el maestro de clase, gran profesional y buena persona. Ocasionalmente (no siempre, con moderación) incluye algún guiño gracioso y cariñoso hacia él. Que sea natural, nunca forzado.
+
+ASIGNATURAS: Conocimiento del Medio, Matemáticas, Lengua (Castellano y Valenciano), Inglés, Música. Responde en español salvo que el recurso sea específicamente de inglés.`;
+
+// ── Pon aquí tu clave gratuita de Google AI Studio (aistudio.google.com) ──
+const GEMINI_KEY = 'PEGA_AQUI_TU_CLAVE_DE_GEMINI';
+const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_KEY}`;
+
+// Historial en formato Gemini: [{role:'user'|'model', parts:[...]}]
+const chatHistory=[];
+let pendingAttach=null;
+
+const msgsEl=document.getElementById('chat-msgs');
+const inEl=document.getElementById('chat-in');
+const btnEl=document.getElementById('chat-btn');
+const prevEl=document.getElementById('attach-preview');
+
+function addMsg(role,html){const d=document.createElement('div');d.className=`msg ${role}`;d.innerHTML=html;msgsEl.appendChild(d);msgsEl.scrollTop=msgsEl.scrollHeight;return d;}
+function showTyping(){const d=document.createElement('div');d.className='msg typing';d.id='typing-dot';d.innerHTML='<div class="dots"><span></span><span></span><span></span></div>';msgsEl.appendChild(d);msgsEl.scrollTop=msgsEl.scrollHeight;}
+function rmTyping(){const t=document.getElementById('typing-dot');if(t)t.remove();}
+
+function onFile(e){
+  const f=e.target.files[0];if(!f)return;
+  const isPdf=f.type==='application/pdf';
+  const reader=new FileReader();
+  reader.onload=ev=>{
+    const b64=ev.target.result.split(',')[1];
+    pendingAttach={type:isPdf?'pdf':'image',base64:b64,mediaType:f.type,name:f.name};
+    prevEl.innerHTML=`<div class="attach-thumb">${isPdf?'📄':'🖼️'} <span>${f.name}</span><button class="attach-rm" onclick="clearAttach()">✕</button></div>`;
+  };
+  reader.readAsDataURL(f);
+  e.target.value='';
+}
+function clearAttach(){pendingAttach=null;prevEl.innerHTML='';}
+function sendSug(btn){inEl.value=btn.textContent.replace(/^[^\w🎬📝🃏✍️🔡❓📐✅❌🗺️🔤]+/,'').trim();sendMsg();}
+
+async function sendMsg(){
+  const txt=inEl.value.trim();
+  if(!txt&&!pendingAttach)return;
+  inEl.value='';btnEl.disabled=true;
+
+  // Construir las partes del mensaje actual
+  const parts=[];
+  let displayHtml='';
+
+  if(pendingAttach){
+    // Adjunto: imagen o PDF como inlineData
+    parts.push({inlineData:{mimeType:pendingAttach.mediaType,data:pendingAttach.base64}});
+    displayHtml=`<div class="msg-attach-lbl">${pendingAttach.type==='pdf'?'📄':'🖼️'} ${pendingAttach.name}</div>`;
+    parts.push({text:txt||'Usa este contenido para crear un recurso de estudio.'});
+    if(txt)displayHtml+=`<br>${txt}`;
+    clearAttach();
+  } else {
+    parts.push({text:txt});
+    displayHtml=txt;
+  }
+
+  addMsg('user',displayHtml);
+
+  // Añadir al historial (guardamos sólo texto para el historial)
+  chatHistory.push({role:'user',parts});
+
+  showTyping();
+  try{
+    const body={
+      system_instruction:{parts:[{text:SYS}]},
+      contents:chatHistory,
+      generationConfig:{maxOutputTokens:1200,temperature:0.7}
+    };
+
+    const res=await fetch(GEMINI_URL,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(body)
+    });
+    const data=await res.json();
+
+    if(data.error){throw new Error(data.error.message||'Error de la API');}
+
+    const reply=data.candidates?.[0]?.content?.parts?.[0]?.text||'Lo siento, no he podido generar respuesta. Inténtalo de nuevo. 😅';
+    rmTyping();
+
+    // Añadir respuesta al historial (Gemini usa "model" en vez de "assistant")
+    chatHistory.push({role:'model',parts:[{text:reply}]});
+
+    const html=reply.replace(/\*\*(.*?)\*\*/g,'<b>$1</b>').replace(/\n/g,'<br>');
+    addMsg('bot',html);
+  }catch(err){
+    console.error('Profe-Bot error:',err);
+    rmTyping();
+    addMsg('bot','😅 Ha ocurrido un error de conexión. Comprueba que la clave de Gemini está bien puesta en el HTML e inténtalo de nuevo.');
+  }
+  btnEl.disabled=false;inEl.focus();
+}
+
+// ════════════════════════════════════════
+//  INIT
+// ════════════════════════════════════════
+initDash();renderCal();
+</script>
+</body>
+</html>
